@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- Annotations version guidelines:
+          Use 3 version numbers to follow semver guidelines
+          Use '-eap' prerelease suffix for EAP builds annotations
+          MAJOR and MINOR version numbers should match latest ReSharper version (to avoid confusion),
+          PATCH version may vary during development and EAPs, better use simple increment -->
+    <Version>2021.3.0-eap4</Version>
+    <TargetFrameworks>netstandard1.0;netstandard2.0;net20;portable40-net40+sl5+win8+wp8+wpa81</TargetFrameworks>
+    <DefineConstants>TRACE;JETBRAINS_ANNOTATIONS;RELEASE</DefineConstants>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>JetBrains.Annotations</AssemblyName>
+    <AssemblyTitle>JetBrains ReSharper Annotations</AssemblyTitle>
+    <Company>JetBrains</Company>
+    <Product>JetBrains .NET Platform</Product>
+    <Authors>JetBrains</Authors>
+    <Description>Annotations to increase accuracy of ReSharper code inspections</Description>
+    <AssemblyOriginatorKeyFile>Subplatform.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize> <!-- it's important to have this enabled -->
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <!-- <PublishRepositoryUrl>true</PublishRepositoryUrl> -->
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <NuspecFile>JetBrains.Annotations.nuspec</NuspecFile>
+    <NuspecProperties>Id=$(AssemblyName);Title=$(AssemblyTitle);Version=$(Version);Configuration=$(Configuration);Authors=$(Authors)</NuspecProperties>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.0'">
+    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)'=='portable40-net40+sl5+win8+wp8+wpa81'">
+    <TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile328</TargetFrameworkProfile>
+    <DefineConstants>$(DefineConstants);PORTABLE328</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Annotations.cs" Link="Source.cs" />
+    <None Include="icon.png" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+</Project>
