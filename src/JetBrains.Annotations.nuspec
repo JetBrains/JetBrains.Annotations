@@ -7,6 +7,7 @@
     <authors>$authors$</authors>
     <owners>$authors$</owners>
     <projectUrl>https://www.jetbrains.com/help/resharper/Code_Analysis__Code_Annotations.html</projectUrl>
+    <repository type="git" url="https://github.com/JetBrains/JetBrains.Annotations.git" />
     <icon>icon.png</icon>
     <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
