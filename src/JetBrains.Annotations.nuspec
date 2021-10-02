@@ -7,7 +7,6 @@
     <authors>$authors$</authors>
     <owners>$authors$</owners>
     <projectUrl>https://www.jetbrains.com/help/resharper/Code_Analysis__Code_Annotations.html</projectUrl>
-    <iconUrl>https://resources.jetbrains.com/storage/products/resharper/img/meta/ReSharper_64.png</iconUrl>
     <icon>icon.png</icon>
     <license type="expression">MIT</license>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -18,17 +17,18 @@ ReSharper Annotations help reduce false positive warnings, explicitly declare pu
 All usages of ReSharper Annotations attributes are erased from metadata by default, which means no actual binary reference to 'JetBrains.Annotations.dll' assembly is produced. If you need to preserve these attributes in metadata, just define 'JETBRAINS_ANNOTATIONS' conditional compilation symbol in your projects.
     </description>
     <releaseNotes>
-      &#8226; Enable deterministic build
-      &#8226; Added AttributeTargets.ReturnValue for CollectionAccessAttribute
-      &#8226; Added 'LanguageInjectionAttribute' to mark parameter, field, or property as an injected code fragment
-      &#8226; Added 'CodeTemplateAttribute' to define structural search and replace patterns in code for members or types
+&#8226; Package/assemblies are now deterministic
+&#8226; Source Link support added
+&#8226; Added AttributeTargets.ReturnValue for CollectionAccessAttribute
+&#8226; Added 'LanguageInjectionAttribute' to mark parameter, field, or property as an injected code fragment
+&#8226; Added 'CodeTemplateAttribute' to define structural search and replace patterns in code for members or types
     </releaseNotes>
     <tags>jetbrains resharper annotations canbenull notnull</tags>
     <dependencies>
       <group targetFramework=".NETFramework2.0" />
       <group targetFramework=".NETPortable4.0-Profile328" />
-      <group targetFramework=".NETStandard1.0"> -->
-        <dependency id="System.Runtime" version="4.1.0" /> -->
+      <group targetFramework=".NETStandard1.0">
+        <dependency id="System.Runtime" version="4.1.0" />
       </group>
       <group targetFramework=".NETStandard2.0" />
     </dependencies>
