@@ -7,7 +7,7 @@
           PATCH version may vary during development and EAPs, better use simple increment -->
     <Version>2021.3.0-eap4</Version>
     <TargetFrameworks>netstandard1.0;netstandard2.0;net20;portable40-net40+sl5+win8+wp8+wpa81</TargetFrameworks>
-    <DefineConstants>TRACE;JETBRAINS_ANNOTATIONS;RELEASE</DefineConstants>
+    <DefineConstants>JETBRAINS_ANNOTATIONS</DefineConstants>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyName>JetBrains.Annotations</AssemblyName>
