@@ -589,10 +589,17 @@ namespace JetBrains.Annotations
   /// Tells the code analysis engine if the parameter is completely handled when the invoked method is on stack.
   /// If the parameter is a delegate, indicates that delegate is executed while the method is executed.
   /// If the parameter is an enumerable, indicates that it is enumerated while the method is executed.
+  /// If <see cref="RequireAwait"/> is true, the attribute is only applied under 'await' expression.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
   [Conditional("JETBRAINS_ANNOTATIONS")]
-  public sealed class InstantHandleAttribute : Attribute { }
+  public sealed class InstantHandleAttribute : Attribute
+  {
+      /// <summary>
+      /// Limits the applicability of the attribute to calls under 'await' expression.
+      /// </summary>
+      public bool RequireAwait { get; set; }
+  }
 
   /// <summary>
   /// Indicates that a method does not make any observable state changes.

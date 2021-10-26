@@ -23,6 +23,7 @@ All usages of ReSharper Annotations attributes are erased from metadata by defau
 &#8226; Added AttributeTargets.ReturnValue for CollectionAccessAttribute
 &#8226; Added 'LanguageInjectionAttribute' to mark parameter, field, or property as an injected code fragment
 &#8226; Added 'CodeTemplateAttribute' to define structural search and replace patterns in code for members or types
+&#8226; Added 'InstantHandleAttribute.RequireAwait' property to limit the applicability of the attribute to calls under 'await' expression
     </releaseNotes>
     <tags>jetbrains resharper annotations canbenull notnull</tags>
     <dependencies>
