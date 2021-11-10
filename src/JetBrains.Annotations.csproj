@@ -2,41 +2,52 @@
   <PropertyGroup>
     <!-- Annotations version guidelines:
           Use 3 version numbers to follow semver guidelines
-          Use '-eap' prerelease suffix for EAP builds annotations
+          Use 'eap' <VersionSuffix> for EAP builds of annotations
           MAJOR and MINOR version numbers should match latest ReSharper version (to avoid confusion),
-          PATCH version may vary during development and EAPs, better use simple increment -->
-    <Version>2021.3.0</Version>
+          PATCH version may vary during development and EAPs -->
+    <VersionPrefix>2022.1.0</VersionPrefix>
+    <VersionSuffix>eap1</VersionSuffix>
+
+    <!-- versioning -->
+    <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
+    <Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
+    <FileVersion>$(VersionPrefix)</FileVersion>
+    <AssemblyName>JetBrains.Annotations</AssemblyName>
+    <AssemblyVersion>4242.42.42.42</AssemblyVersion>
+
+    <!-- compilation -->
     <TargetFrameworks>netstandard1.0;netstandard2.0;net20;portable40-net40+sl5+win8+wp8+wpa81</TargetFrameworks>
     <DefineConstants>JETBRAINS_ANNOTATIONS</DefineConstants>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyName>JetBrains.Annotations</AssemblyName>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+
+    <!-- metadata -->
     <AssemblyTitle>JetBrains ReSharper Annotations</AssemblyTitle>
     <Company>JetBrains</Company>
     <Product>JetBrains .NET Platform</Product>
     <Authors>JetBrains</Authors>
     <Description>Annotations to increase accuracy of ReSharper code inspections</Description>
+    <RepositoryUrl Condition="'$(TargetFramework)'!='portable40-net40+sl5+win8+wp8+wpa81'">https://github.com/JetBrains/JetBrains.Annotations/</RepositoryUrl>
+
+    <!-- signing -->
     <AssemblyOriginatorKeyFile>Subplatform.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
-    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <!-- it's important to have this enabled -->
+
+    <!-- deterministic build -->
     <Optimize>true</Optimize>
     <Deterministic>true</Deterministic>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-  </PropertyGroup>
 
-  <!-- source link -->
-  <PropertyGroup>
+    <!-- source link -->
     <DebugSymbols>false</DebugSymbols>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <DebugType>portable</DebugType>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-  </PropertyGroup>
 
-  <!-- packaging -->
-  <PropertyGroup>
+    <!-- packaging -->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NuspecFile>JetBrains.Annotations.nuspec</NuspecFile>
     <NuspecProperties>Id=$(AssemblyName);Title=$(AssemblyTitle);Version=$(Version);Configuration=$(Configuration);Authors=$(Authors)</NuspecProperties>
