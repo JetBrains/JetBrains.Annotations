@@ -18,12 +18,8 @@ ReSharper Annotations help reduce false positive warnings, explicitly declare pu
 All usages of ReSharper Annotations attributes are erased from metadata by default, which means no actual binary reference to 'JetBrains.Annotations.dll' assembly is produced. If you need to preserve these attributes in metadata, just define 'JETBRAINS_ANNOTATIONS' conditional compilation symbol in your projects.
     </description>
     <releaseNotes>
-&#8226; Package/assemblies are now deterministic
-&#8226; Source Link support added
-&#8226; Added AttributeTargets.ReturnValue for CollectionAccessAttribute
-&#8226; Added 'LanguageInjectionAttribute' to mark parameter, field, or property as an injected code fragment
-&#8226; Added 'CodeTemplateAttribute' to define structural search and replace patterns in code for members or types
-&#8226; Added 'InstantHandleAttribute.RequireAwait' property to limit the applicability of the attribute to calls under 'await' expression
+&#8226; Added RouteConventionAttribute, DefaultRouteValuesAttribute and RouteValuesConstraintsAttribute for ASP.NET convention based routing support
+&#8226; Added AttributeRoutingAttribute, RouteOrderAttribute and RouteVerbsAttribute for ASP.NET attribute routing support
     </releaseNotes>
     <tags>jetbrains resharper annotations canbenull notnull</tags>
     <dependencies>

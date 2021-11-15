@@ -1682,4 +1682,51 @@ namespace JetBrains.Annotations
     /// </summary>
     public string SuppressionKey { get; set; }
   }
+
+  /// <summary>
+  /// Indicates that the marked method declares routing convention for ASP.NET
+  /// </summary>
+  /// <remarks>
+  /// ReSharper will analyze all usages of methods marked with this attribute,
+  /// and will add all routes to completion, navigation and other features over URI strings
+  /// </remarks>
+  [AttributeUsage(AttributeTargets.Method)]
+  public class RouteConventionAttribute : Attribute { }
+  
+  /// <summary>
+  /// Indicates that the marked method parameter contains default route values of routing convention for ASP.NET
+  /// </summary>
+  [AttributeUsage(AttributeTargets.Parameter)]
+  public class DefaultRouteValuesAttribute : Attribute { }
+  
+  /// <summary>
+  /// Indicates that the marked method parameter contains constraints on route values of routing convention for ASP.NET
+  /// </summary>
+  [AttributeUsage(AttributeTargets.Parameter)]
+  public class RouteValuesConstraintsAttribute : Attribute { }
+  
+  /// <summary>
+  /// Indicates that the marked parameter or property contains routing order provided by ASP.NET routing attribute
+  /// </summary>
+  [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter)]
+  public class RouteOrderAttribute : Attribute { }
+  
+  /// <summary>
+  /// Indicates that the marked parameter or property contains HTTP verbs provided by ASP.NET routing attribute
+  /// </summary>
+  [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter)]
+  public class RouteVerbsAttribute : Attribute { }
+
+  /// <summary>
+  /// Indicates that the marked attribute is used for attribute routing in ASP.NET
+  /// </summary>
+  /// <remarks>
+  /// ReSharper will analyze all usages of attributes marked with this attribute,
+  /// and will add all routes to completion, navigation and other features over URI strings
+  /// </remarks>
+  [AttributeUsage(AttributeTargets.Class)]
+  public class AttributeRoutingAttribute : Attribute
+  {
+    public string HttpVerb { get; set; }
+  }
 }
