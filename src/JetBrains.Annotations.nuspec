@@ -20,6 +20,7 @@ All usages of ReSharper Annotations attributes are erased from metadata by defau
     <releaseNotes>
 &#8226; Added RouteConventionAttribute, DefaultRouteValuesAttribute and RouteValuesConstraintsAttribute for ASP.NET convention based routing support
 &#8226; Added AttributeRoutingAttribute, RouteOrderAttribute and RouteVerbsAttribute for ASP.NET attribute routing support
+&#8226; Added MinimalApiDeclarationAttribute and MinimalApiHandlerAttribute for ASP.NET Minimal API support
     </releaseNotes>
     <tags>jetbrains resharper annotations canbenull notnull</tags>
     <dependencies>
