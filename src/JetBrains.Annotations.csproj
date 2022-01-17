@@ -5,7 +5,7 @@
           Use '-eap' prerelease suffix for EAP builds annotations
           MAJOR and MINOR version numbers should match latest ReSharper version (to avoid confusion),
           PATCH version may vary during development and EAPs, better use simple increment -->
-    <Version>2022.1.0-eap1</Version>
+    <Version>2022.1.0-eap2</Version>
     <TargetFrameworks>netstandard1.0;netstandard2.0;net20;portable40-net40+sl5+win8+wp8+wpa81</TargetFrameworks>
     <DefineConstants>JETBRAINS_ANNOTATIONS</DefineConstants>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>

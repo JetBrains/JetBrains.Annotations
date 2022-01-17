@@ -1729,4 +1729,23 @@ namespace JetBrains.Annotations
   {
     public string HttpVerb { get; set; }
   }
+
+  /// <summary>
+  /// Indicates that the marked method declares ASP.NET Minimal API endpoint
+  /// </summary>
+  /// <remarks>
+  /// ReSharper will analyze all usages of methods marked with this attribute,
+  /// and will add all routes to completion, navigation and other features over URI strings
+  /// </remarks>
+  [AttributeUsage(AttributeTargets.Method)]
+  public class MinimalApiDeclarationAttribute : Attribute
+  {
+    public string HttpVerb { get; set; }
+  }
+
+  /// <summary>
+  /// Indicates that the marked parameter contains ASP.NET Minimal API endpoint handler
+  /// </summary>
+  [AttributeUsage(AttributeTargets.Parameter)]
+  public class MinimalApiHandlerAttribute : Attribute { }
 }
