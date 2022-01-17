@@ -1687,7 +1687,7 @@ namespace JetBrains.Annotations
   /// Indicates that the marked method declares routing convention for ASP.NET
   /// </summary>
   /// <remarks>
-  /// ReSharper will analyze all usages of methods marked with this attribute,
+  /// IDE will analyze all usages of methods marked with this attribute,
   /// and will add all routes to completion, navigation and other features over URI strings
   /// </remarks>
   [AttributeUsage(AttributeTargets.Method)]
@@ -1721,7 +1721,7 @@ namespace JetBrains.Annotations
   /// Indicates that the marked attribute is used for attribute routing in ASP.NET
   /// </summary>
   /// <remarks>
-  /// ReSharper will analyze all usages of attributes marked with this attribute,
+  /// IDE will analyze all usages of attributes marked with this attribute,
   /// and will add all routes to completion, navigation and other features over URI strings
   /// </remarks>
   [AttributeUsage(AttributeTargets.Class)]
@@ -1734,7 +1734,7 @@ namespace JetBrains.Annotations
   /// Indicates that the marked method declares ASP.NET Minimal API endpoint
   /// </summary>
   /// <remarks>
-  /// ReSharper will analyze all usages of methods marked with this attribute,
+  /// IDE will analyze all usages of methods marked with this attribute,
   /// and will add all routes to completion, navigation and other features over URI strings
   /// </remarks>
   [AttributeUsage(AttributeTargets.Method)]
