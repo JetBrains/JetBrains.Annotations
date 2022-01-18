@@ -659,7 +659,7 @@ namespace JetBrains.Annotations
   /// </remarks>
   [AttributeUsage(AttributeTargets.Parameter)]
   [Conditional("JETBRAINS_ANNOTATIONS")]
-  public class RequireStaticDelegateAttribute : Attribute
+  public sealed class RequireStaticDelegateAttribute : Attribute
   {
     public bool IsError { get; set; }
   }
@@ -1538,31 +1538,36 @@ namespace JetBrains.Annotations
   /// and will add all routes to completion, navigation and other features over URI strings
   /// </remarks>
   [AttributeUsage(AttributeTargets.Method)]
-  public class RouteConventionAttribute : Attribute { }
-  
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class AspRouteConventionAttribute : Attribute { }
+
   /// <summary>
   /// Indicates that the marked method parameter contains default route values of routing convention for ASP.NET
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
-  public class DefaultRouteValuesAttribute : Attribute { }
-  
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class AspDefaultRouteValuesAttribute : Attribute { }
+
   /// <summary>
   /// Indicates that the marked method parameter contains constraints on route values of routing convention for ASP.NET
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
-  public class RouteValuesConstraintsAttribute : Attribute { }
-  
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class AspRouteValuesConstraintsAttribute : Attribute { }
+
   /// <summary>
   /// Indicates that the marked parameter or property contains routing order provided by ASP.NET routing attribute
   /// </summary>
   [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter)]
-  public class RouteOrderAttribute : Attribute { }
-  
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class AspRouteOrderAttribute : Attribute { }
+
   /// <summary>
   /// Indicates that the marked parameter or property contains HTTP verbs provided by ASP.NET routing attribute
   /// </summary>
   [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter)]
-  public class RouteVerbsAttribute : Attribute { }
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class AspRouteVerbsAttribute : Attribute { }
 
   /// <summary>
   /// Indicates that the marked attribute is used for attribute routing in ASP.NET
@@ -1572,7 +1577,8 @@ namespace JetBrains.Annotations
   /// and will add all routes to completion, navigation and other features over URI strings
   /// </remarks>
   [AttributeUsage(AttributeTargets.Class)]
-  public class AttributeRoutingAttribute : Attribute
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class AspAttributeRoutingAttribute : Attribute
   {
     public string HttpVerb { get; set; }
   }
@@ -1585,7 +1591,8 @@ namespace JetBrains.Annotations
   /// and will add all routes to completion, navigation and other features over URI strings
   /// </remarks>
   [AttributeUsage(AttributeTargets.Method)]
-  public class MinimalApiDeclarationAttribute : Attribute
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class AspMinimalApiDeclarationAttribute : Attribute
   {
     public string HttpVerb { get; set; }
   }
@@ -1594,8 +1601,9 @@ namespace JetBrains.Annotations
   /// Indicates that the marked parameter contains ASP.NET Minimal API endpoint handler
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
-  public class MinimalApiHandlerAttribute : Attribute { }
-}
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class AspMinimalApiHandlerAttribute : Attribute { }
+
   #endregion
 
   #region Razor

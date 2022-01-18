@@ -18,9 +18,9 @@ JetBrains.Annotations help reduce false positive warnings, explicitly declare pu
 All usages of JetBrains.Annotations attributes are erased from metadata by default, which means no actual binary reference to 'JetBrains.Annotations.dll' assembly is produced. If you need to preserve these attributes in metadata, just define 'JETBRAINS_ANNOTATIONS' conditional compilation symbol in your projects.
     </description>
     <releaseNotes>
-&#8226; Added RouteConventionAttribute, DefaultRouteValuesAttribute and RouteValuesConstraintsAttribute for ASP.NET convention based routing support
-&#8226; Added AttributeRoutingAttribute, RouteOrderAttribute and RouteVerbsAttribute for ASP.NET attribute routing support
-&#8226; Added MinimalApiDeclarationAttribute and MinimalApiHandlerAttribute for ASP.NET Minimal API support
+&#8226; Added AspRouteConventionAttribute, AspDefaultRouteValuesAttribute and AspRouteValuesConstraintsAttribute for ASP.NET convention based routing support
+&#8226; Added AspAttributeRoutingAttribute, AspRouteOrderAttribute and AspRouteVerbsAttribute for ASP.NET attribute routing support
+&#8226; Added AspMinimalApiDeclarationAttribute and AspMinimalApiHandlerAttribute for ASP.NET Minimal API support
     </releaseNotes>
     <tags>jetbrains resharper rider annotations canbenull notnull</tags>
     <dependencies>
