@@ -23,7 +23,7 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
 
     <!-- metadata -->
-    <AssemblyTitle>JetBrains ReSharper Annotations</AssemblyTitle>
+    <AssemblyTitle>JetBrains Annotations</AssemblyTitle>
     <Company>JetBrains</Company>
     <Product>JetBrains .NET Platform</Product>
     <Authors>JetBrains</Authors>
