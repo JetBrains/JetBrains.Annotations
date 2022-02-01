@@ -1547,7 +1547,7 @@ namespace JetBrains.Annotations
     {
       PredefinedPattern = predefinedPattern;
     }
-    
+
     [CanBeNull] public string PredefinedPattern { get; }
   }
 
