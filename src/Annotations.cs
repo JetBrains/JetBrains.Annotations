@@ -1539,7 +1539,17 @@ namespace JetBrains.Annotations
   /// </remarks>
   [AttributeUsage(AttributeTargets.Method)]
   [Conditional("JETBRAINS_ANNOTATIONS")]
-  public sealed class AspRouteConventionAttribute : Attribute { }
+  public sealed class AspRouteConventionAttribute : Attribute
+  {
+    public AspRouteConventionAttribute() { }
+
+    public AspRouteConventionAttribute(string predefinedPattern)
+    {
+      PredefinedPattern = predefinedPattern;
+    }
+    
+    [CanBeNull] public string PredefinedPattern { get; }
+  }
 
   /// <summary>
   /// Indicates that the marked method parameter contains default route values of routing convention for ASP.NET
