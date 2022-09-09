@@ -947,12 +947,17 @@ namespace JetBrains.Annotations
 
   /// <summary>
   /// Indicates that the marked parameter, field, or property is accepting a string literal
-  /// containing code fragment in a language specified by the <see cref="InjectedLanguage"/>.
+  /// containing code fragment in a specified language.
   /// </summary>
   /// <example><code>
   /// void Foo([LanguageInjection(InjectedLanguage.CSS, Prefix = "body{", Suffix = "}")] string cssProps)
   /// {
   ///   // cssProps should only contains a list of CSS properties
+  /// }
+  /// </code></example>
+  /// <example><code>
+  /// void Bar([LanguageInjection("json")] string json)
+  /// {
   /// }
   /// </code></example>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
@@ -964,13 +969,21 @@ namespace JetBrains.Annotations
       InjectedLanguage = injectedLanguage;
     }
 
-    /// <summary>Specify a language of injected code fragment.</summary>
+    public LanguageInjectionAttribute([NotNull] string injectedLanguage)
+    {
+      InjectedLanguageName = injectedLanguage;
+    }
+
+    /// <summary>Specifies a language of injected code fragment.</summary>
     public InjectedLanguage InjectedLanguage { get; }
 
-    /// <summary>Specify a string that "precedes" injected string literal.</summary>
+    /// <summary>Specifies a language name of injected code fragment.</summary>
+    [CanBeNull] public string InjectedLanguageName { get; }
+
+    /// <summary>Specifies a string that "precedes" injected string literal.</summary>
     [CanBeNull] public string Prefix { get; set; }
 
-    /// <summary>Specify a string that "follows" injected string literal.</summary>
+    /// <summary>Specifies a string that "follows" injected string literal.</summary>
     [CanBeNull] public string Suffix { get; set; }
   }
 
