@@ -1623,6 +1623,13 @@ namespace JetBrains.Annotations
   }
 
   /// <summary>
+  /// Indicates that the marked method declares ASP.NET Minimal API endpoints group
+  /// </summary>
+  [AttributeUsage(AttributeTargets.Method)]
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class AspMinimalApiGroupAttribute : Attribute { }
+
+  /// <summary>
   /// Indicates that the marked parameter contains ASP.NET Minimal API endpoint handler
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
