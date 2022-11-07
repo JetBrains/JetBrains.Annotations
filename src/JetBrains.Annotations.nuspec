@@ -19,6 +19,7 @@ All usages of JetBrains.Annotations attributes are erased from metadata by defau
     </description>
     <releaseNotes>
 &#8226; Additional constructor for [LanguageInjection]
+&#8226; Added AspMinimalApiGroupAttribute for ASP.NET Minimal API endpoints groups support
     </releaseNotes>
     <tags>jetbrains resharper rider annotations canbenull notnull</tags>
     <dependencies>
