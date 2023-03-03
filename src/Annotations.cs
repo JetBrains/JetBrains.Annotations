@@ -1280,6 +1280,18 @@ namespace JetBrains.Annotations
 
   [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
   [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class AspMvcAreaViewComponentViewLocationFormatAttribute : Attribute
+  {
+    public AspMvcAreaViewComponentViewLocationFormatAttribute([NotNull] string format)
+    {
+      Format = format;
+    }
+
+    [NotNull] public string Format { get; }
+  }
+  
+  [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
+  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcAreaViewLocationFormatAttribute : Attribute
   {
     public AspMvcAreaViewLocationFormatAttribute([NotNull] string format)
@@ -1307,6 +1319,18 @@ namespace JetBrains.Annotations
   public sealed class AspMvcPartialViewLocationFormatAttribute : Attribute
   {
     public AspMvcPartialViewLocationFormatAttribute([NotNull] string format)
+    {
+      Format = format;
+    }
+
+    [NotNull] public string Format { get; }
+  }
+  
+  [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class AspMvcViewComponentViewLocationFormatAttribute : Attribute
+  {
+    public AspMvcViewComponentViewLocationFormatAttribute([NotNull] string format)
     {
       Format = format;
     }
