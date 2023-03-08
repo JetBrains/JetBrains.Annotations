@@ -1289,7 +1289,7 @@ namespace JetBrains.Annotations
 
     [NotNull] public string Format { get; }
   }
-  
+
   [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
   [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcAreaViewLocationFormatAttribute : Attribute
@@ -1325,7 +1325,7 @@ namespace JetBrains.Annotations
 
     [NotNull] public string Format { get; }
   }
-  
+
   [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
   [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcViewComponentViewLocationFormatAttribute : Attribute
@@ -1782,7 +1782,7 @@ namespace JetBrains.Annotations
 
   /// <summary>
   /// XAML attribute. Indicates the type that has an <c>ItemsSource</c> property and should be treated
-  /// as an <c>ItemsControl</c>-derived type, to enable inner items <c>DataContext</c> type resolvement.
+  /// as an <c>ItemsControl</c>-derived type, to enable inner items <c>DataContext</c> type resolution.
   /// </summary>
   [AttributeUsage(AttributeTargets.Class)]
   [Conditional("JETBRAINS_ANNOTATIONS")]
