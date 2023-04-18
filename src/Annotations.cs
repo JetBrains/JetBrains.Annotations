@@ -1835,7 +1835,7 @@ namespace JetBrains.Annotations
   public sealed class XamlTwoWayBindingModeByDefaultAttribute : Attribute { }
 
   #endregion
-  
+
   #region Unit Testing
 
   /// <summary>
