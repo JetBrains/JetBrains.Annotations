@@ -1835,4 +1835,35 @@ namespace JetBrains.Annotations
   public sealed class XamlTwoWayBindingModeByDefaultAttribute : Attribute { }
 
   #endregion
+  
+  #region Unit Testing
+
+  /// <summary>
+  /// Specifies the subject being tested by a test class or a test method.
+  /// </summary>
+  /// <remarks>
+  /// The <see cref="TestSubjectAttribute"/> can be applied to a test class or a test method to indicate what class
+  /// or interface the tests defined in them test. This information can be used by an IDE to provide better navigation
+  /// support or by test runners to group tests by subject and to provide better test reports.
+  /// </remarks>
+  [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true)]
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class TestSubjectAttribute : Attribute
+  {
+    /// <summary>
+    /// Gets the type of the subject being tested.
+    /// </summary>
+    [NotNull] public Type Subject { get; }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TestSubjectAttribute"/> class with the specified subject type.
+    /// </summary>
+    /// <param name="subject">The type of the subject being tested.</param>
+    public TestSubjectAttribute([NotNull] Type subject)
+    {
+      Subject = subject;
+    }
+  }
+
+  #endregion
 }
