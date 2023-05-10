@@ -1865,5 +1865,32 @@ namespace JetBrains.Annotations
     }
   }
 
+  /// <summary>
+  /// Signifies a generic argument as the test subject for a test class.
+  /// </summary>
+  /// <remarks>
+  /// The <see cref="MeansTestSubjectAttribute"/> can be applied to a generic parameter of a base test class to indicate that
+  /// the type passed as the argument is the class being tested. This information can be used by an IDE to provide better
+  /// navigation support or by test runners to group tests by subject and to provide better test reports.
+  /// </remarks>
+  /// <example><code>
+  /// public class BaseTestClass&lt;[MeansTestSubject] T&gt;
+  /// {
+  ///   protected T Component { get; }
+  /// }
+  /// 
+  /// public class CalculatorAdditionTests : BaseTestClass&lt;Calculator&gt;
+  /// {
+  ///   [Test]
+  ///   public void Should_add_two_numbers()
+  ///   {
+  ///      Assert.That(Component.Add(2,3 ), Is.EqualTo(5));
+  ///   }
+  /// }
+  /// </code></example>
+  [AttributeUsage(AttributeTargets.GenericParameter)]
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class MeansTestSubjectAttribute : Attribute { }
+
   #endregion
 }
