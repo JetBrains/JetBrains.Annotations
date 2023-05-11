@@ -1884,7 +1884,7 @@ namespace JetBrains.Annotations
   ///   [Test]
   ///   public void Should_add_two_numbers()
   ///   {
-  ///      Assert.That(Component.Add(2,3 ), Is.EqualTo(5));
+  ///      Assert.That(Component.Add(2, 3), Is.EqualTo(5));
   ///   }
   /// }
   /// </code></example>

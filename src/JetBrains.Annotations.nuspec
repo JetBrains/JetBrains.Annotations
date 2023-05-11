@@ -19,7 +19,7 @@ All usages of JetBrains.Annotations attributes are erased from metadata by defau
     </description>
     <releaseNotes>
 &#8226; Added AspMvcViewComponentViewLocationFormatAttribute and AspMvcAreaViewComponentViewLocationFormatAttribute for ASP.NET Core ViewComponent views support
-&#8226; Added TestSubjectAttribute for Unit Testing IDE features
+&#8226; Added TestSubjectAttribute and MeansTestSubjectAttribute for Unit Testing IDE features
     </releaseNotes>
     <tags>jetbrains resharper rider annotations canbenull notnull</tags>
     <dependencies>
