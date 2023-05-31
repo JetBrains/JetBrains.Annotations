@@ -6,7 +6,7 @@
           MAJOR and MINOR version numbers should match latest ReSharper version (to avoid confusion),
           PATCH version may vary during development and EAPs -->
     <VersionPrefix>2023.2.0</VersionPrefix>
-    <VersionSuffix>eap3</VersionSuffix>
+    <VersionSuffix>eap4</VersionSuffix>
 
     <!-- versioning -->
     <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
