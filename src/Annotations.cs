@@ -647,6 +647,55 @@ namespace JetBrains.Annotations
   }
 
   /// <summary>
+  /// Indicates that the resulting resource of the constructor or method invocation must be disposed after use.
+  /// </summary>
+  /// <remarks>
+  /// Annotating input parameters with this attribute is meaningless. <br/>
+  /// Constructors inherit this attribute from their class, if it is decorated. <br/>
+  /// Because of attribute inheritance, you should explicitly decorate constructors which are
+  /// calling base constructor that is already decorated with this attribute. <br/>
+  /// Disposing is expected to be performed via either <c>using (resource)</c> statement, <c>using var</c> declaration,
+  /// or call to a method with kind of <see cref="HandlesResourceDisposalAttribute"/> decoration,
+  /// usually <c>IDisposable.Dispose()</c> implementation.
+  /// </remarks>
+  [AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Parameter)]
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class MustDisposeResourceAttribute : Attribute
+  {
+    public MustDisposeResourceAttribute()
+    {
+      Value = true;
+    }
+
+    /// <param name="value"><inheritdoc cref="Value" path="/summary"/></param>
+    public MustDisposeResourceAttribute(bool value)
+    {
+      Value = value;
+    }
+
+    /// <summary>
+    /// When set to <c>false</c>, disposing of the resource is not obligatory and will be performed during garbage collection.
+    /// The main use-case for explicit <c>[MustDisposeResource(false)]</c> annotation is to loosen inherited annotation.
+    /// </summary>
+    public bool Value { get; }
+  }
+
+  /// <summary>
+  /// Indicates that method or class instance acquires resource ownership and will dispose it after use.
+  /// </summary>
+  /// <remarks>
+  /// Decorating an out parameter with this attribute is meaningless. <br/>
+  /// When a method itself is decorated with this attribute, its call disposes instance resource. <br/>
+  /// When a field or a property is decorated with this attribute, it shows that this class owns the resource in it
+  /// and will dispose it properly (e.g. in own Dispose method).
+  /// </remarks>
+  [AttributeUsage(
+    AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class HandlesResourceDisposalAttribute : Attribute { }
+
+  /// <summary>
   /// This annotation allows to enforce allocation-less usage patterns of delegates for performance-critical APIs.
   /// When this annotation is applied to the parameter of delegate type, the IDE checks the input argument of this parameter:
   /// * When a lambda expression or anonymous method is passed as an argument, the IDE verifies that the passed closure
