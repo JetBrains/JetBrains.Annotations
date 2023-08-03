@@ -647,16 +647,20 @@ namespace JetBrains.Annotations
   }
 
   /// <summary>
-  /// Indicates that the resulting resource of the constructor or method invocation must be disposed after use.
+  /// Indicates that the resource disposal must be handled by the use site,
+  /// meaning that the resource ownership is transferred to the callee.
+  /// This annotation can be used to annotate disposable types or their constructors individually to enable
+  /// the resource disposal IDE code analysis in every context where the new instance of this type is created.
+  /// Factory methods and 'out' parameters can also be annotated to indicate that the return value of disposable type
+  /// needs handling.
   /// </summary>
   /// <remarks>
-  /// Annotating input parameters with this attribute is meaningless. <br/>
-  /// Constructors inherit this attribute from their class, if it is decorated. <br/>
-  /// Because of attribute inheritance, you should explicitly decorate constructors which are
-  /// calling base constructor that is already decorated with this attribute. <br/>
-  /// Disposing is expected to be performed via either <c>using (resource)</c> statement, <c>using var</c> declaration,
-  /// or call to a method with kind of <see cref="HandlesResourceDisposalAttribute"/> decoration,
-  /// usually <c>IDisposable.Dispose()</c> implementation.
+  /// Annotation of input parameters with this attribute is meaningless.<br/>
+  /// Constructors inherit this attribute from their type, if it is annotated,
+  /// but not from the base constructors they delegate to (if any).<br/>
+  /// Resource disposal is expected to be expressed via either <c>using (resource)</c> statement,
+  /// <c>using var</c> declaration, explicit 'Dispose' method call, or an argument passing
+  /// to a parameter with the <see cref="HandlesResourceDisposalAttribute"/> attribute applied.
   /// </remarks>
   [AttributeUsage(
     AttributeTargets.Class | AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Parameter)]
@@ -668,14 +672,13 @@ namespace JetBrains.Annotations
       Value = true;
     }
 
-    /// <param name="value"><inheritdoc cref="Value" path="/summary"/></param>
     public MustDisposeResourceAttribute(bool value)
     {
       Value = value;
     }
 
     /// <summary>
-    /// When set to <c>false</c>, disposing of the resource is not obligatory and will be performed during garbage collection.
+    /// When set to <c>false</c>, disposing of the resource is not obligatory.
     /// The main use-case for explicit <c>[MustDisposeResource(false)]</c> annotation is to loosen inherited annotation.
     /// </summary>
     public bool Value { get; }
@@ -685,10 +688,11 @@ namespace JetBrains.Annotations
   /// Indicates that method or class instance acquires resource ownership and will dispose it after use.
   /// </summary>
   /// <remarks>
-  /// Decorating an out parameter with this attribute is meaningless. <br/>
-  /// When a method itself is decorated with this attribute, its call disposes instance resource. <br/>
-  /// When a field or a property is decorated with this attribute, it shows that this class owns the resource in it
-  /// and will dispose it properly (e.g. in own Dispose method).
+  /// Annotation of 'out' parameter with this attribute is meaningless.<br/>
+  /// When a instance method is annotated with this attribute,
+  /// it means that it is handling the resource disposal of the corresponding resource instance.<br/>
+  /// When a field or a property is annotated with this attribute, it means that this type owns the resource
+  /// and will handle the resource disposal properly (e.g. in own IDisposable implementation).
   /// </remarks>
   [AttributeUsage(
     AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
