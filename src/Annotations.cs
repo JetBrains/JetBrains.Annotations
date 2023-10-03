@@ -768,6 +768,7 @@ namespace JetBrains.Annotations
   /// Text inside these comments is added as source code when the template is applied. Template parameters
   /// can be used either as additional method parameters or as identifiers wrapped in two '$' signs.
   /// Use the <see cref="MacroAttribute"/> attribute to specify macros for parameters.
+  /// The expression to be used in the expansion can be adjusted by the <see cref="SourceTemplateAttribute.Target"/> parameter.
   /// </remarks>
   /// <example>
   /// In this example, the 'forEach' method is a source template available over all values
@@ -783,7 +784,42 @@ namespace JetBrains.Annotations
   /// </example>
   [AttributeUsage(AttributeTargets.Method)]
   [Conditional("JETBRAINS_ANNOTATIONS")]
-  public sealed class SourceTemplateAttribute : Attribute { }
+  public sealed class SourceTemplateAttribute : Attribute
+  {
+    /// <summary>
+    /// Allows specifying which expression to capture for template execution if more than one present on the expansion.
+    /// If omitted, the Default is assumed.
+    /// </summary>
+    /// <example>
+    /// <code>_args = args.{caret}</code>
+    /// Inner: args
+    /// Outer: _args = args
+    /// </example>
+    /// <remarks>
+    /// In versions before 2023.3 the Default used to be the Outer. Since 2023.3 the Default is Inner.
+    /// <see cref="MinimumVersion"/> if this causes problems in specific cases.
+    /// </remarks>
+    public SourceTemplateTargetExpression Target { get; set; }
+    /// <summary>
+    /// Allows to hide the source template from the users of the older versions of the product if a serious difference
+    /// in behaviour was introduced and template is not suitable or applicable in the previous versions.
+    /// </summary>
+    /// <remarks>
+    /// 0 - Applicable for all versions
+    /// 1 - 2023.3 and higher. Notable change: default capturing expression have been changed from Outer to Inner
+    /// Products before 2023.2 do not know about this parameter and will ignore it. Workaround: SourceTemplateExAttribute
+    /// can be added to the solution as an exact copy of this attribute, older version will ignore it and will not suggest
+    /// templates for expansion.
+    /// Specify this parameter only if you have a reasons to do so.
+    /// </remarks>
+    public int MinimumVersion { get; set; }
+  }
+  public enum SourceTemplateTargetExpression
+  {
+    Default = 0,
+    Inner = 1,
+    Outer = 2
+  }
 
   /// <summary>
   /// Allows specifying a macro for a parameter of a <see cref="SourceTemplateAttribute">source template</see>.
