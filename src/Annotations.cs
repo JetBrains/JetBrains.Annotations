@@ -788,37 +788,22 @@ namespace JetBrains.Annotations
   {
     /// <summary>
     /// Allows specifying which expression to capture for template execution if more than one present on the expansion.
-    /// If omitted, the Default is assumed.
+    /// If not specified, Inner is assumed.
     /// </summary>
-    /// <example>
-    /// <code>_args = args.{caret}</code>
-    /// Inner: args
-    /// Outer: _args = args
-    /// </example>
-    /// <remarks>
-    /// In versions before 2023.3 the Default used to be the Outer. Since 2023.3 the Default is Inner.
-    /// <see cref="MinimumVersion"/> if this causes problems in specific cases.
-    /// </remarks>
     public SourceTemplateTargetExpression Target { get; set; }
-    /// <summary>
-    /// Allows to hide the source template from the users of the older versions of the product if a serious difference
-    /// in behaviour was introduced and template is not suitable or applicable in the previous versions.
-    /// </summary>
-    /// <remarks>
-    /// 0 - Applicable for all versions
-    /// 1 - 2023.3 and higher. Notable change: default capturing expression have been changed from Outer to Inner
-    /// Products before 2023.2 do not know about this parameter and will ignore it. Workaround: SourceTemplateExAttribute
-    /// can be added to the solution as an exact copy of this attribute, older version will ignore it and will not suggest
-    /// templates for expansion.
-    /// Specify this parameter only if you have a reasons to do so.
-    /// </remarks>
-    public int MinimumVersion { get; set; }
   }
+  /// <summary>
+  /// Provides a value for the <see cref="SourceTemplateAttribute"/> to define how to capture
+  /// the expression at the point of expansion
+  /// </summary>
   public enum SourceTemplateTargetExpression
   {
-    Default = 0,
-    Inner = 1,
-    Outer = 2
+    /// <summary>Selects inner expression</summary>
+    /// <example><c>_args = args.{caret}</c> captures <c>args</c></example>
+    Inner = 0,
+    /// <summary>Selects outer expression</summary>
+    /// <example><c>_args = args.{caret}</c> captures whole assignment</example>
+    Outer = 1
   }
 
   /// <summary>
