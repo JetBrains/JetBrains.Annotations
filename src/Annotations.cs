@@ -768,6 +768,7 @@ namespace JetBrains.Annotations
   /// Text inside these comments is added as source code when the template is applied. Template parameters
   /// can be used either as additional method parameters or as identifiers wrapped in two '$' signs.
   /// Use the <see cref="MacroAttribute"/> attribute to specify macros for parameters.
+  /// The expression to be used in the expansion can be adjusted by the <see cref="SourceTemplateAttribute.Target"/> parameter.
   /// </remarks>
   /// <example>
   /// In this example, the 'forEach' method is a source template available over all values
@@ -783,7 +784,27 @@ namespace JetBrains.Annotations
   /// </example>
   [AttributeUsage(AttributeTargets.Method)]
   [Conditional("JETBRAINS_ANNOTATIONS")]
-  public sealed class SourceTemplateAttribute : Attribute { }
+  public sealed class SourceTemplateAttribute : Attribute
+  {
+    /// <summary>
+    /// Allows specifying which expression to capture for template execution if more than one present on the expansion.
+    /// If not specified, Inner is assumed.
+    /// </summary>
+    public SourceTemplateTargetExpression Target { get; set; }
+  }
+  /// <summary>
+  /// Provides a value for the <see cref="SourceTemplateAttribute"/> to define how to capture
+  /// the expression at the point of expansion
+  /// </summary>
+  public enum SourceTemplateTargetExpression
+  {
+    /// <summary>Selects inner expression</summary>
+    /// <example><c>_args = args.{caret}</c> captures <c>args</c></example>
+    Inner = 0,
+    /// <summary>Selects outer expression</summary>
+    /// <example><c>_args = args.{caret}</c> captures whole assignment</example>
+    Outer = 1
+  }
 
   /// <summary>
   /// Allows specifying a macro for a parameter of a <see cref="SourceTemplateAttribute">source template</see>.
