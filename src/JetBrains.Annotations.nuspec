@@ -19,6 +19,7 @@ All usages of JetBrains.Annotations attributes are erased from metadata by defau
     </description>
     <releaseNotes>
 &#8226; Added MustDisposeResourceAttribute and HandlesResourceDisposalAttribute attributes for resource disposal analysis.
+&#8226; Added SourceTemplateAttribute.Target property to provide a way to specify expression source template must be applied to.
     </releaseNotes>
     <tags>jetbrains resharper rider annotations canbenull notnull</tags>
     <dependencies>
