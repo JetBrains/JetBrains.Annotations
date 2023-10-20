@@ -1760,8 +1760,11 @@ namespace JetBrains.Annotations
   public sealed class AspMinimalApiImplicitEndpointDeclarationAttribute : Attribute
   {
     public string HttpVerb { get; set; }
+
     public string RouteTemplate { get; set; }
+
     public Type BodyType { get; set; }
+
     /// <summary>
     /// Comma-separated list of query parameters defined for endpoint
     /// </summary>
