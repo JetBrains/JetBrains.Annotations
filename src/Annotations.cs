@@ -1275,6 +1275,16 @@ namespace JetBrains.Annotations
     public string SuppressionKey { get; set; }
   }
 
+  /// <summary>
+  /// Indicates that the string literal, passed as an argument matching this parameter,
+  /// should not be checked on spelling or grammar errors.
+  /// </summary>
+  [AttributeUsage(AttributeTargets.Parameter)]
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class IgnoreSpellingAndGrammarErrorsAttribute : Attribute
+  {
+  }
+
   #region ASP.NET
 
   [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
@@ -1737,6 +1747,29 @@ namespace JetBrains.Annotations
   [AttributeUsage(AttributeTargets.Parameter)]
   [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMinimalApiHandlerAttribute : Attribute { }
+
+  /// <summary>
+  /// Indicates that the marked method contains Minimal API endpoint declaration.
+  /// </summary>
+  /// <remarks>
+  /// The IDE will analyze all usages of methods marked with this attribute,
+  /// and will add all declared in attributes routes to completion, navigation and other features over URI strings.
+  /// </remarks>
+  [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class AspMinimalApiImplicitEndpointDeclarationAttribute : Attribute
+  {
+    public string HttpVerb { get; set; }
+
+    public string RouteTemplate { get; set; }
+
+    public Type BodyType { get; set; }
+
+    /// <summary>
+    /// Comma-separated list of query parameters defined for endpoint
+    /// </summary>
+    public string QueryParameters { get; set; }
+  }
 
   #endregion
 

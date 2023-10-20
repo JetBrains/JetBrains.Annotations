@@ -20,6 +20,8 @@ All usages of JetBrains.Annotations attributes are erased from metadata by defau
     <releaseNotes>
 &#8226; Added MustDisposeResourceAttribute and HandlesResourceDisposalAttribute attributes for resource disposal analysis.
 &#8226; Added SourceTemplateAttribute.Target property to provide a way to specify expression source template must be applied to.
+&#8226; Added IgnoreSpellingAndGrammarErrorsAttribute to allow ignore grammar and spelling errors in literals passed to marked parameters.
+&#8226; Added AspMinimalApiImplicitEndpointDeclarationAttribute to make IDE aware of Minimal API endpoints from third-party libraries.
     </releaseNotes>
     <tags>jetbrains resharper rider annotations canbenull notnull</tags>
     <dependencies>
