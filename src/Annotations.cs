@@ -1072,7 +1072,7 @@ namespace JetBrains.Annotations
   /// The attribute must be mentioned in your member reordering patterns.
   /// </remarks>
   [AttributeUsage(
-    AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Enum)]
+    AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Enum, AllowMultiple = true)]
   [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class NoReorderAttribute : Attribute { }
 
