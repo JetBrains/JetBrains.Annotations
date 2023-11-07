@@ -22,6 +22,7 @@ All usages of JetBrains.Annotations attributes are erased from metadata by defau
 &#8226; Added SourceTemplateAttribute.Target property to provide a way to specify expression source template must be applied to.
 &#8226; Added IgnoreSpellingAndGrammarErrorsAttribute to allow ignore grammar and spelling errors in literals passed to marked parameters.
 &#8226; Added AspMinimalApiImplicitEndpointDeclarationAttribute to make IDE aware of Minimal API endpoints from third-party libraries.
+&#8226; NoReorderAttribute can now be applied to multiple parts of the same type.
     </releaseNotes>
     <tags>jetbrains resharper rider annotations canbenull notnull</tags>
     <dependencies>
