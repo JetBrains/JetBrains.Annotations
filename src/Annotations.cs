@@ -648,7 +648,7 @@ namespace JetBrains.Annotations
 
   /// <summary>
   /// Indicates that the resource disposal must be handled by the use site,
-  /// meaning that the resource ownership is transferred to the callee.
+  /// meaning that the resource ownership is transferred to the caller.
   /// This annotation can be used to annotate disposable types or their constructors individually to enable
   /// the resource disposal IDE code analysis in every context where the new instance of this type is created.
   /// Factory methods and 'out' parameters can also be annotated to indicate that the return value of disposable type
