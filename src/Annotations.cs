@@ -143,8 +143,8 @@ namespace JetBrains.Annotations
   }
 
   /// <summary>
-  /// Indicates that the marked parameter is a message template where placeholders are to be replaced by the following arguments
-  /// in the order in which they appear.
+  /// Indicates that the marked parameter is a message template where placeholders are to be replaced by
+  /// the following arguments in the order in which they appear.
   /// </summary>
   /// <example><code>
   /// void LogInfo([StructuredMessageTemplate]string message, params object[] args) { /* do something */ }
@@ -595,7 +595,8 @@ namespace JetBrains.Annotations
   /// (the delegate can be invoked zero or multiple times, but not stored to some field and invoked later,
   /// when the containing method is no longer on the execution stack).
   /// If the parameter is an enumerable, indicates that it is enumerated while the method is executed.
-  /// If <see cref="RequireAwait"/> is true, the attribute will only take effect if the method invocation is located under the <c>await</c> expression.
+  /// If <see cref="RequireAwait"/> is true, the attribute will only take effect
+  /// if the method invocation is located under the <c>await</c> expression.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
   [Conditional("JETBRAINS_ANNOTATIONS")]
@@ -653,8 +654,8 @@ namespace JetBrains.Annotations
   /// meaning that the resource ownership is transferred to the caller.
   /// This annotation can be used to annotate disposable types or their constructors individually to enable
   /// the IDE code analysis for resource disposal in every context where the new instance of this type is created.
-  /// Factory methods and <c>out</c> parameters can also be annotated to indicate that the return value of the disposable type
-  /// needs handling.
+  /// Factory methods and <c>out</c> parameters can also be annotated to indicate that the return value
+  /// of the disposable type needs handling.
   /// </summary>
   /// <remarks>
   /// Annotation of input parameters with this attribute is meaningless.<br/>
@@ -681,7 +682,8 @@ namespace JetBrains.Annotations
 
     /// <summary>
     /// When set to <c>false</c>, disposing of the resource is not obligatory.
-    /// The main use-case for explicit <c>[MustDisposeResource(false)]</c> annotation is to loosen the annotation for inheritors.
+    /// The main use-case for explicit <c>[MustDisposeResource(false)]</c> annotation
+    /// is to loosen the annotation for inheritors.
     /// </summary>
     public bool Value { get; }
   }
@@ -703,7 +705,8 @@ namespace JetBrains.Annotations
 
   /// <summary>
   /// This annotation allows enforcing allocation-less usage patterns of delegates for performance-critical APIs.
-  /// When this annotation is applied to the parameter of a delegate type, the IDE checks the input argument of this parameter:
+  /// When this annotation is applied to the parameter of a delegate type,
+  /// the IDE checks the input argument of this parameter:
   /// * When a lambda expression or anonymous method is passed as an argument, the IDE verifies that the passed closure
   ///   has no captures of the containing local variables and the compiler is able to cache the delegate instance
   ///   to avoid heap allocations. Otherwise, a warning is produced.
@@ -770,7 +773,8 @@ namespace JetBrains.Annotations
   /// Text inside these comments is added as source code when the template is applied. Template parameters
   /// can be used either as additional method parameters or as identifiers wrapped in two '$' signs.
   /// Use the <see cref="MacroAttribute"/> attribute to specify macros for parameters.
-  /// The expression to be used in the expansion can be adjusted by the <see cref="SourceTemplateAttribute.Target"/> parameter.
+  /// The expression to be used in the expansion can be adjusted
+  /// by the <see cref="SourceTemplateAttribute.Target"/> parameter.
   /// </remarks>
   /// <example>
   /// In this example, the <c>forEach</c> method is a source template available over all values
@@ -789,7 +793,8 @@ namespace JetBrains.Annotations
   public sealed class SourceTemplateAttribute : Attribute
   {
     /// <summary>
-    /// Allows specifying the expression to capture for template execution if more than one expression is available at the expansion point.
+    /// Allows specifying the expression to capture for template execution if more than one expression
+    /// is available at the expansion point.
     /// If not specified, <see cref="SourceTemplateTargetExpression.Inner"/> is assumed.
     /// </summary>
     public SourceTemplateTargetExpression Target { get; set; }
@@ -1084,17 +1089,21 @@ namespace JetBrains.Annotations
   /// </summary>
   /// <remarks>
   /// Search and replace patterns consist of a textual part and placeholders.
-  /// Textural part must contain only identifiers allowed in the target language and will be matched exactly (whitespaces, tabulation characters, and line breaks are ignored).
+  /// Textural part must contain only identifiers allowed in the target language and will be matched exactly
+  /// (whitespaces, tabulation characters, and line breaks are ignored).
   /// Placeholders allow matching variable parts of the target code blocks.
   /// <br/>
-  /// A placeholder has the following format: <c>$placeholder_name$</c> - where <c>placeholder_name</c> is an arbitrary identifier.
+  /// A placeholder has the following format:
+  /// <c>$placeholder_name$</c> - where <c>placeholder_name</c> is an arbitrary identifier.
   /// Predefined placeholders:
   /// <list type="bullet">
   /// <item><c>$this$</c> - expression of containing type</item>
   /// <item><c>$thisType$</c> - containing type</item>
   /// <item><c>$member$</c> - current member placeholder</item>
-  /// <item><c>$qualifier$</c> - this placeholder is available in the replace pattern and can be used to insert a qualifier expression matched by the <c>$member$</c> placeholder.
-  /// (Note that if <c>$qualifier$</c> placeholder is used, then <c>$member$</c> placeholder will match only qualified references)</item>
+  /// <item><c>$qualifier$</c> - this placeholder is available in the replace pattern and can be used
+  /// to insert a qualifier expression matched by the <c>$member$</c> placeholder.
+  /// (Note that if <c>$qualifier$</c> placeholder is used,
+  /// then <c>$member$</c> placeholder will match only qualified references)</item>
   /// <item><c>$expression$</c> - expression of any type</item>
   /// <item><c>$identifier$</c> - identifier placeholder</item>
   /// <item><c>$args$</c> - any number of arguments</item>
@@ -1110,10 +1119,14 @@ namespace JetBrains.Annotations
   /// <item><c>$statement{1,2}$</c> - 1 or 2 statements</item>
   /// </list>
   /// You can also define your own placeholders of the supported types and specify arguments for each placeholder type.
-  /// This can be done using the following format: <c>$name{type, arguments}$</c>. Where <c>name</c> - is the name of your placeholder,
-  /// <c>type</c> - is the type of your placeholder (one of the following: Expression, Type, Identifier, Statement, Argument, Member),
-  /// <c>arguments</c> - a list of arguments for your placeholder. Each placeholder type supports its own arguments. Check the examples below for more details.
-  /// The placeholder type may be omitted and determined from the placeholder name, if the name has one of the following prefixes:
+  /// This can be done using the following format: <c>$name{type, arguments}$</c>. Where
+  /// <c>name</c> - is the name of your placeholder,
+  /// <c>type</c> - is the type of your placeholder
+  /// (one of the following: Expression, Type, Identifier, Statement, Argument, Member),
+  /// <c>arguments</c> - a list of arguments for your placeholder. Each placeholder type supports its own arguments.
+  /// Check the examples below for more details.
+  /// The placeholder type may be omitted and determined from the placeholder name,
+  /// if the name has one of the following prefixes:
   /// <list type="bullet">
   /// <item>expr, expression - expression placeholder, e.g. <c>$exprPlaceholder{}$</c>, <c>$expressionFoo{}$</c></item>
   /// <item>arg, argument - argument placeholder, e.g. <c>$argPlaceholder{}$</c>, <c>$argumentFoo{}$</c></item>
@@ -1126,29 +1139,38 @@ namespace JetBrains.Annotations
   /// <para>
   /// Expression placeholder arguments:
   /// <list type="bullet">
-  /// <item>expressionType - string value in single quotes, specifies full type name to match (empty string by default)</item>
+  /// <item>expressionType - string value in single quotes, specifies full type name to match
+  /// (empty string by default)</item>
   /// <item>exactType - boolean value, specifies if expression should have exact type match (false by default)</item>
   /// </list>
   /// Examples:
   /// <list type="bullet">
-  /// <item><c>$myExpr{Expression, 'Namespace.FooType', true}$</c> - defines an expression placeholder matching expressions of the <c>Namespace.FooType</c> type with exact matching.</item>
-  /// <item><c>$myExpr{Expression, 'Namespace.FooType'}$</c> - defines an expression placeholder matching expressions of the <c>Namespace.FooType</c> type or expressions that can be implicitly converted to <c>Namespace.FooType</c>.</item>
+  /// <item><c>$myExpr{Expression, 'Namespace.FooType', true}$</c> - defines an expression placeholder
+  /// matching expressions of the <c>Namespace.FooType</c> type with exact matching.</item>
+  /// <item><c>$myExpr{Expression, 'Namespace.FooType'}$</c> - defines an expression placeholder
+  /// matching expressions of the <c>Namespace.FooType</c> type or expressions that can be
+  /// implicitly converted to <c>Namespace.FooType</c>.</item>
   /// <item><c>$myExpr{Expression}$</c> - defines an expression placeholder matching expressions of any type.</item>
-  /// <item><c>$exprFoo{'Namespace.FooType', true}$</c> - defines an expression placeholder matching expressions of the <c>Namespace.FooType</c> type with exact matching.</item>
+  /// <item><c>$exprFoo{'Namespace.FooType', true}$</c> - defines an expression placeholder
+  /// matching expressions of the <c>Namespace.FooType</c> type with exact matching.</item>
   /// </list>
   /// </para>
   /// <para>
   /// Type placeholder arguments:
   /// <list type="bullet">
   /// <item>type - string value in single quotes, specifies the full type name to match (empty string by default)</item>
-  /// <item>exactType - boolean value, specifies whether the expression should have the exact type match (false by default)</item>
+  /// <item>exactType - boolean value, specifies whether the expression should have the exact type match
+  /// (false by default)</item>
   /// </list>
   /// Examples:
   /// <list type="bullet">
-  /// <item><c>$myType{Type, 'Namespace.FooType', true}$</c> - defines a type placeholder matching <c>Namespace.FooType</c> types with exact matching.</item>
-  /// <item><c>$myType{Type, 'Namespace.FooType'}$</c> - defines a type placeholder matching <c>Namespace.FooType</c> types or types that can be implicitly converted to <c>Namespace.FooType</c>.</item>
+  /// <item><c>$myType{Type, 'Namespace.FooType', true}$</c> - defines a type placeholder
+  /// matching <c>Namespace.FooType</c> types with exact matching.</item>
+  /// <item><c>$myType{Type, 'Namespace.FooType'}$</c> - defines a type placeholder matching <c>Namespace.FooType</c>
+  /// types or types that can be implicitly converted to <c>Namespace.FooType</c>.</item>
   /// <item><c>$myType{Type}$</c> - defines a type placeholder matching any type.</item>
-  /// <item><c>$typeFoo{'Namespace.FooType', true}$</c> - defines a type placeholder matching <c>Namespace.FooType</c> types with exact matching.</item>
+  /// <item><c>$typeFoo{'Namespace.FooType', true}$</c> - defines a type placeholder matching <c>Namespace.FooType</c>
+  /// types with exact matching.</item>
   /// </list>
   /// </para>
   /// <para>
@@ -1161,9 +1183,14 @@ namespace JetBrains.Annotations
   /// </list>
   /// Examples:
   /// <list type="bullet">
-  /// <item><c>$myIdentifier{Identifier, 'my.*', false, 'Namespace.FooType', true}$</c> - defines an identifier placeholder matching identifiers (ignoring case) starting with <c>my</c> prefix with <c>Namespace.FooType</c> type.</item>
-  /// <item><c>$myIdentifier{Identifier, 'my.*', true, 'Namespace.FooType', true}$</c> - defines an identifier placeholder matching identifiers (case sensitively) starting with <c>my</c> prefix with <c>Namespace.FooType</c> type.</item>
-  /// <item><c>$identFoo{'my.*'}$</c> - defines an identifier placeholder matching identifiers (case sensitively) starting with <c>my</c> prefix.</item>
+  /// <item><c>$myIdentifier{Identifier, 'my.*', false, 'Namespace.FooType', true}$</c> -
+  /// defines an identifier placeholder matching identifiers (ignoring case) starting with <c>my</c> prefix with
+  /// <c>Namespace.FooType</c> type.</item>
+  /// <item><c>$myIdentifier{Identifier, 'my.*', true, 'Namespace.FooType', true}$</c> -
+  /// defines an identifier placeholder matching identifiers (case sensitively) starting with <c>my</c> prefix with
+  /// <c>Namespace.FooType</c> type.</item>
+  /// <item><c>$identFoo{'my.*'}$</c> - defines an identifier placeholder matching identifiers (case sensitively)
+  /// starting with <c>my</c> prefix.</item>
   /// </list>
   /// </para>
   /// <para>
@@ -1199,12 +1226,16 @@ namespace JetBrains.Annotations
   /// </list>
   /// Examples:
   /// <list type="bullet">
-  /// <item><c>$myMember{Member, 'M:System.String.IsNullOrEmpty(System.String)'}$</c> - defines a member placeholder matching <c>IsNullOrEmpty</c> member of the <c>System.String</c> type.</item>
-  /// <item><c>$memberFoo{'M:System.String.IsNullOrEmpty(System.String)'}$</c> - defines a member placeholder matching <c>IsNullOrEmpty</c> member of the <c>System.String</c> type.</item>
+  /// <item><c>$myMember{Member, 'M:System.String.IsNullOrEmpty(System.String)'}$</c> -
+  /// defines a member placeholder matching <c>IsNullOrEmpty</c> member of the <c>System.String</c> type.</item>
+  /// <item><c>$memberFoo{'M:System.String.IsNullOrEmpty(System.String)'}$</c> -
+  /// defines a member placeholder matching <c>IsNullOrEmpty</c> member of the <c>System.String</c> type.</item>
   /// </list>
   /// </para>
-  /// <seealso href="https://www.jetbrains.com/help/resharper/Navigation_and_Search__Structural_Search_and_Replace.html">Structural Search and Replace</seealso>.
-  /// <seealso href="https://www.jetbrains.com/help/resharper/Code_Analysis__Find_and_Update_Obsolete_APIs.html">Find and update deprecated APIs</seealso>.
+  /// <seealso href="https://www.jetbrains.com/help/resharper/Navigation_and_Search__Structural_Search_and_Replace.html">
+  /// Structural Search and Replace</seealso>
+  /// <seealso href="https://www.jetbrains.com/help/resharper/Code_Analysis__Find_and_Update_Obsolete_APIs.html">
+  /// Find and update deprecated APIs</seealso>
   [AttributeUsage(
     AttributeTargets.Method
     | AttributeTargets.Constructor
@@ -1238,7 +1269,8 @@ namespace JetBrains.Annotations
     /// Message to show when a code block matching the search pattern was found.
     /// </summary>
     /// <remarks>
-    /// You can also prepend the message text with 'Error:', 'Warning:', 'Suggestion:' or 'Hint:' prefix to specify the pattern severity.
+    /// You can also prepend the message text with 'Error:', 'Warning:', 'Suggestion:' or 'Hint:' prefix
+    /// to specify the pattern severity.
     /// Code patterns with replace templates have the 'Suggestion' severity by default.
     /// If a replace pattern is not provided, the pattern will have the 'Warning' severity.
     ///</remarks>
@@ -1265,14 +1297,16 @@ namespace JetBrains.Annotations
     public bool MatchSimilarConstructs { get; set; }
 
     /// <summary>
-    /// Automatically insert namespace import directives or remove qualifiers that become redundant after the template is applied.
+    /// Automatically insert namespace import directives or remove qualifiers
+    /// that become redundant after the template is applied.
     /// </summary>
     public bool ShortenReferences { get; set; }
 
     /// <summary>
     /// The string to use as a suppression key.
     /// By default, the following suppression key is used: <c>CodeTemplate_SomeType_SomeMember</c>,
-    /// where 'SomeType' and 'SomeMember' are names of the associated containing type and member, to which this attribute is applied.
+    /// where 'SomeType' and 'SomeMember' are names of the associated containing type and member,
+    /// to which this attribute is applied.
     /// </summary>
     public string SuppressionKey { get; set; }
   }
