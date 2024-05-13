@@ -10,6 +10,7 @@
     <repository type="git" url="https://github.com/JetBrains/JetBrains.Annotations.git" />
     <icon>icon.png</icon>
     <license type="expression">MIT</license>
+    <copyright>Copyright (c) 2016-2024 JetBrains s.r.o.</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>Annotations to increase accuracy of JetBrains Rider and ReSharper code inspections</summary>
     <description>
@@ -23,6 +24,7 @@ All usages of JetBrains.Annotations attributes are erased from metadata by defau
 &#8226; Added IgnoreSpellingAndGrammarErrorsAttribute to allow ignore grammar and spelling errors in literals passed to marked parameters.
 &#8226; Added AspMinimalApiImplicitEndpointDeclarationAttribute to make IDE aware of Minimal API endpoints from third-party libraries.
 &#8226; NoReorderAttribute can now be applied to multiple parts of the same type.
+&#8226; Added copyright information to nuspec.
     </releaseNotes>
     <tags>jetbrains resharper rider annotations canbenull notnull</tags>
     <dependencies>
