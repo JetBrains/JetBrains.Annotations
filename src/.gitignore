@@ -3,3 +3,4 @@
 /.vs/
 *.snk
 /.idea/
+/_ReSharper.Caches/**

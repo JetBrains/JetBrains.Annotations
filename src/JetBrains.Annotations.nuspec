@@ -19,11 +19,7 @@ JetBrains.Annotations help reduce false positive warnings, explicitly declare pu
 All usages of JetBrains.Annotations attributes are erased from metadata by default, which means no actual binary reference to 'JetBrains.Annotations.dll' assembly is produced. If you need to preserve these attributes in metadata, just define 'JETBRAINS_ANNOTATIONS' conditional compilation symbol in your projects.
     </description>
     <releaseNotes>
-&#8226; Added MustDisposeResourceAttribute and HandlesResourceDisposalAttribute attributes for resource disposal analysis.
-&#8226; Added SourceTemplateAttribute.Target property to provide a way to specify expression source template must be applied to.
-&#8226; Added IgnoreSpellingAndGrammarErrorsAttribute to allow ignore grammar and spelling errors in literals passed to marked parameters.
-&#8226; Added AspMinimalApiImplicitEndpointDeclarationAttribute to make IDE aware of Minimal API endpoints from third-party libraries.
-&#8226; NoReorderAttribute can now be applied to multiple parts of the same type.
+&#8226; Added DefaultEqualityUsageAttribute for equality members usage analysis.
 &#8226; Added copyright information to nuspec.
     </releaseNotes>
     <tags>jetbrains resharper rider annotations canbenull notnull</tags>
