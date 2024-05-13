@@ -436,6 +436,42 @@ namespace JetBrains.Annotations
   public sealed class CannotApplyEqualityOperatorAttribute : Attribute { }
 
   /// <summary>
+  /// Indicates that the method or type uses equality members of the annotated element.
+  /// </summary>
+  /// <remarks>
+  /// When applied to the method's generic parameter, indicates that the equality of the annotated type is used,
+  /// unless a custom equality comparer is passed when calling this method. The attribute can also be applied
+  /// directly to the method's parameter or return type to specify equality usage for it.
+  /// When applied to the type's generic parameter, indicates that type equality usage can happen anywhere
+  /// inside this type, so the instantiation of this type is treated as equality usage, unless a custom
+  /// equality comparer is passed to the constructor.
+  /// </remarks>
+  /// <example><code>
+  /// struct StructWithDefaultEquality { }
+  /// 
+  /// class MySet&lt;[DefaultEqualityUsage] T&gt; { }
+  /// 
+  /// static class Extensions {
+  ///     public static MySet&lt;T&gt; ToMySet&lt;[DefaultEqualityUsage] T&gt;(this IEnumerable&lt;T&gt; items) =&gt; new();
+  /// }
+  /// 
+  /// class MyList&lt;T&gt; { public int IndexOf([DefaultEqualityUsage] T item) =&gt; 0; }
+  /// 
+  /// class UsesDefaultEquality {
+  ///     void Test() {
+  ///         var list = new MyList&lt;StructWithDefaultEquality&gt;();
+  ///         list.IndexOf(new StructWithDefaultEquality()); // Warning: Default equality of struct 'StructWithDefaultEquality' is used
+  ///         
+  ///         var set = new MySet&lt;StructWithDefaultEquality&gt;(); // Warning: Default equality of struct 'StructWithDefaultEquality' is used
+  ///         var set2 = new StructWithDefaultEquality[1].ToMySet(); // Warning: Default equality of struct 'StructWithDefaultEquality' is used
+  ///     }
+  /// }
+  /// </code></example>
+  [AttributeUsage(AttributeTargets.GenericParameter | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class DefaultEqualityUsageAttribute : Attribute { }
+
+  /// <summary>
   /// When applied to a target attribute, specifies a requirement for any type marked
   /// with the target attribute to implement or inherit the specific type or types.
   /// </summary>
