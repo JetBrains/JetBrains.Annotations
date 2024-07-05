@@ -702,7 +702,8 @@ namespace JetBrains.Annotations
   /// to a parameter annotated with the <see cref="HandlesResourceDisposalAttribute"/> attribute.
   /// </remarks>
   [AttributeUsage(
-    AttributeTargets.Class | AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Parameter)]
+    AttributeTargets.Class | AttributeTargets.Struct |
+    AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Parameter)]
   [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class MustDisposeResourceAttribute : Attribute
   {

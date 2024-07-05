@@ -4,3 +4,4 @@
 *.snk
 /.idea/
 /_ReSharper.Caches/**
+*.dotSettings.user
