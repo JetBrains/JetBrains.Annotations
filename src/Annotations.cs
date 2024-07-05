@@ -536,6 +536,8 @@ namespace JetBrains.Annotations
     public ImplicitUseKindFlags UseKindFlags { get; }
 
     public ImplicitUseTargetFlags TargetFlags { get; }
+
+    public string Reason { get; set; }
   }
 
   /// <summary>
