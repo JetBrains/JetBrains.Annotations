@@ -21,6 +21,8 @@ All usages of JetBrains.Annotations attributes are erased from metadata by defau
     <releaseNotes>
 &#8226; Added DefaultEqualityUsageAttribute for equality members usage analysis.
 &#8226; Added copyright information to nuspec.
+&#8226; MustDisposeResourceAttribute is now allowed on struct types.
+&#8226; Added ability to specify the description for UsedImplicitlyAttribute (new 'Reason' property).
     </releaseNotes>
     <tags>jetbrains resharper rider annotations canbenull notnull</tags>
     <dependencies>
