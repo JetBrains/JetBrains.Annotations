@@ -685,6 +685,18 @@ namespace JetBrains.Annotations
     }
 
     [CanBeNull] public string Justification { get; }
+
+    /// <summary>
+    /// Enables the special handling of the "fluent" APIs that perform mutations and return 'this' object.
+    /// In this case the analysis checks the fluent invocations chain and only warns if the initial receiver value
+    /// is probably a temporary value - in this case the very last fluent method return assumed to be temporary as well,
+    /// therefore is a subject of warning if unused. If the initial receiver is a local variable or 'this' reference
+    /// the analysis assumes that fluent invocations were used to mutate the existing value and warning will not be shown.
+    /// </summary>
+    /// <remarks>
+    /// This property must only be used for methods with the return type matching the receiver type.
+    /// </remarks>
+    public bool IsFluentBuilderMethod { get; set; }
   }
 
   /// <summary>

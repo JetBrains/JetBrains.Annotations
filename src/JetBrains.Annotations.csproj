@@ -5,8 +5,8 @@
           Use 'eap' <VersionSuffix> for EAP builds of annotations
           MAJOR and MINOR version numbers should match latest ReSharper version (to avoid confusion),
           PATCH version may vary during development and EAPs -->
-    <VersionPrefix>2024.2.0</VersionPrefix>
-    <!--<VersionSuffix>eap1</VersionSuffix>-->
+    <VersionPrefix>2024.3.0</VersionPrefix>
+    <VersionSuffix>eap1</VersionSuffix>
 
     <!-- versioning -->
     <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
