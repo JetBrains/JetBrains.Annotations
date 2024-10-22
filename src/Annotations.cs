@@ -24,14 +24,16 @@ SOFTWARE. */
 
 using System;
 using System.Diagnostics;
-// ReSharper disable UnusedType.Global
-
 #pragma warning disable 1591
+// ReSharper disable UnusedType.Global
 // ReSharper disable UnusedMember.Global
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 // ReSharper disable IntroduceOptionalParameters.Global
 // ReSharper disable MemberCanBeProtected.Global
+// ReSharper disable ConvertToPrimaryConstructor
+// ReSharper disable RedundantTypeDeclarationBody
+// ReSharper disable ArrangeNamespaceBody
 // ReSharper disable InconsistentNaming
 
 namespace JetBrains.Annotations
@@ -1096,7 +1098,7 @@ namespace JetBrains.Annotations
   /// {
   /// }
   /// </code></example>
-  [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
+  [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.ReturnValue)]
   [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class LanguageInjectionAttribute : Attribute
   {
