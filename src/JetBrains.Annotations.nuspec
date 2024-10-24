@@ -13,6 +13,7 @@
     <copyright>Copyright (c) 2016-2024 JetBrains s.r.o.</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <summary>Annotations to increase accuracy of JetBrains Rider and ReSharper code inspections</summary>
+    <readme>readme.md</readme>
     <description>
 JetBrains.Annotations help reduce false positive warnings, explicitly declare purity and nullability in your code, deal with implicit usages of members, support special semantics of APIs in ASP.NET and XAML frameworks and otherwise increase accuracy of JetBrains Rider and ReSharper code inspections.
 
@@ -37,5 +38,6 @@ All usages of JetBrains.Annotations attributes are erased from metadata by defau
   <files>
     <file src="bin\$configuration$\**" exclude="**.nupkg" target="lib" />
     <file src="icon.png" target="" />
+    <file src="..\readme.md" target="" />
   </files>
 </package>
