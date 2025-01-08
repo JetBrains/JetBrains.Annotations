@@ -24,6 +24,7 @@ All usages of JetBrains.Annotations attributes are erased from metadata by defau
 &#8226; MustDisposeResourceAttribute is now allowed on struct types.
 &#8226; Added ability to specify the description for UsedImplicitlyAttribute (new 'Reason' property).
 &#8226; Added copyright information to nuspec.
+&#8226; Added CqrsCommandAttribute, CqrsQueryAttribute, CqrsCommandHandlerAttribute, CqrsQueryHandlerAttribute and CqrsExcludeFromAnalysisAttribute to support CQRS analyzes of naming and adherence to the pattern.
     </releaseNotes>
     <tags>jetbrains resharper rider annotations canbenull notnull</tags>
     <dependencies>
