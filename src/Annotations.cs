@@ -2093,4 +2093,161 @@ namespace JetBrains.Annotations
   public sealed class MeansTestSubjectAttribute : Attribute { }
 
   #endregion
+
+  #region CQRS (Сommand Query Responsibility Segregation) pattern
+
+  /// <summary>
+  /// A declaration marked with this attribute will be recognized as a CQRS Command.
+  /// Its naming and adherence to the CQRS pattern will be checked.
+  /// </summary>
+  /// <example><code>
+  /// public class User
+  /// {
+  ///   private string Name;
+  ///   [CqrsCommand]
+  ///   void SetUserNameCommand(string newName)
+  ///   {
+  ///     if (newName == GetUserName()) // Warning about "GetUserName" is called from Command but belongs to the Query
+  ///       return;
+  ///     Name = newName;
+  ///   }
+  /// 
+  ///   [CqrsQuery]
+  ///   string GetUserName() // Suggestion to rename it to the GetUserNameQuery and Quickfix for it
+  ///   {
+  ///     return Name;
+  ///   }
+  /// }
+  /// </code></example>
+  [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
+                  AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property)]
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class CqrsCommandAttribute : Attribute { }
+
+  /// <summary>
+  /// A declaration marked with this attribute will be recognized as a CQRS Query.
+  /// Its naming and adherence to the CQRS pattern will be checked.
+  /// </summary>
+  /// <example><code>
+  /// public class User
+  /// {
+  ///   private string Name;
+  ///   [CqrsCommand]
+  ///   void SetUserNameCommand(string newName)
+  ///   {
+  ///     if (newName == GetUserName()) // Warning about "GetUserName" is called from Command but belongs to the Query
+  ///       return;
+  ///     Name = newName;
+  ///   }
+  /// 
+  ///   [CqrsQuery]
+  ///   string GetUserName() // Suggestion to rename it to the GetUserNameQuery and Quickfix for it
+  ///   {
+  ///     return Name;
+  ///   }
+  /// }
+  /// </code></example>
+  [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
+                  AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property)]
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class CqrsQueryAttribute : Attribute { }
+
+  /// <summary>
+  /// A declaration marked with this attribute will be recognized as a CQRS CommandHandler.
+  /// Its naming and adherence to the CQRS pattern will be checked.
+  /// </summary>
+  /// <example><code>
+  /// [CqrsCommandHandler]
+  /// public class UserCommandHandler
+  /// {
+  ///   void Handle(SetUserNameCommand command)
+  ///   {
+  ///     var query = new GetUserNameQuery() { Id = command.Id }; // Warning about using Query inside Command
+  ///     var handler = new UserQuery(); // Warning about using Query inside Command
+  ///     if (command.Name == handler.Handle(query)) // Warning about using Query inside Command
+  ///       return;
+  ///     // ... implementation
+  ///   }
+  /// }
+  /// 
+  /// [CqrsQueryHandler]
+  /// public class UserQuery // Suggestion to rename to the UserQueryHandler
+  /// {
+  ///   public string Handle(GetUserNameQuery query)
+  ///   {
+  ///     return "";
+  ///   }
+  /// }
+  /// </code></example>
+  [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
+                  AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property)]
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class CqrsCommandHandlerAttribute : Attribute { }
+
+  /// <summary>
+  /// A declaration marked with this attribute will be recognized as a CQRS QueryHandler.
+  /// Its naming and adherence to the CQRS pattern will be checked.
+  /// </summary>
+  /// <example><code>
+  /// [CqrsCommandHandler]
+  /// public class UserCommandHandler
+  /// {
+  ///   void Handle(SetUserNameCommand command)
+  ///   {
+  ///     var query = new GetUserNameQuery() { Id = command.Id }; // Warning about using Query inside Command
+  ///     var handler = new UserQuery(); // Warning about using Query inside Command
+  ///     if (command.Name == handler.Handle(query)) // Warning about using Query inside Command
+  ///       return;
+  ///     // ... implementation
+  ///   }
+  /// }
+  /// 
+  /// [CqrsQueryHandler]
+  /// public class UserQuery // Suggestion to rename to the UserQueryHandler
+  /// {
+  ///   public string Handle(GetUserNameQuery query)
+  ///   {
+  ///     return "";
+  ///   }
+  /// }
+  /// </code></example>
+  [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
+                  AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property)]
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class CqrsQueryHandlerAttribute : Attribute { }
+
+  /// <summary>
+  /// Indicates that marked element must be excluded from CQRS-related analyzes.
+  /// </summary>
+  /// <example><code>
+  /// public class User
+  /// {
+  ///   private string Name;
+  ///   [CqrsCommand]
+  ///   void SetUserNameCommand(string newName)
+  ///   {
+  ///     if(newName == GetUserName()) // Warning about "GetUserName" is called from Command but belongs to the Query
+  ///       return;
+  ///     Name = newName;
+  ///     CheckName();
+  ///   }
+  /// 
+  ///   [CqrsQuery]
+  ///   string GetUserName() // Suggestion to rename it to the GetUserNameQuery and Quickfix for it
+  ///   {
+  ///     CheckName();
+  ///     return Name;
+  ///   }
+  /// 
+  ///   [CqrsExcludeFromAnalysis]
+  ///   bool CheckName() // Although this method is used both in Command and Query, will be ignored in all CQRS analyzes
+  ///   { ... }
+  /// }
+  /// </code></example>
+  [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
+                  AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property)]
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class CqrsExcludeFromAnalysisAttribute : Attribute { }
+
+  #endregion
 }
