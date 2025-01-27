@@ -2094,7 +2094,7 @@ namespace JetBrains.Annotations
 
   #endregion
 
-  #region CQRS (Сommand Query Responsibility Segregation) pattern
+  #region CQRS Support
 
   /// <summary>
   /// A declaration marked with this attribute will be recognized as a CQRS Command.
@@ -2104,16 +2104,18 @@ namespace JetBrains.Annotations
   /// public class User
   /// {
   ///   private string Name;
+  /// 
   ///   [CqrsCommand]
-  ///   void SetUserNameCommand(string newName)
+  ///   public void SetUserNameCommand(string newName)
   ///   {
-  ///     if (newName == GetUserName()) // Warning about "GetUserName" is called from Command but belongs to the Query
+  ///     if (newName == GetUserName()) // Warning about 'GetUserName' is called from Command but belongs to the Query
   ///       return;
+  /// 
   ///     Name = newName;
   ///   }
   /// 
   ///   [CqrsQuery]
-  ///   string GetUserName() // Suggestion to rename it to the GetUserNameQuery and Quickfix for it
+  ///   public string GetUserName() // Suggestion to rename it to the 'GetUserNameQuery'
   ///   {
   ///     return Name;
   ///   }
@@ -2132,16 +2134,18 @@ namespace JetBrains.Annotations
   /// public class User
   /// {
   ///   private string Name;
+  /// 
   ///   [CqrsCommand]
-  ///   void SetUserNameCommand(string newName)
+  ///   public void SetUserNameCommand(string newName)
   ///   {
-  ///     if (newName == GetUserName()) // Warning about "GetUserName" is called from Command but belongs to the Query
+  ///     if (newName == GetUserName()) // Warning about 'GetUserName' is called from Command but belongs to the Query
   ///       return;
+  /// 
   ///     Name = newName;
   ///   }
   /// 
   ///   [CqrsQuery]
-  ///   string GetUserName() // Suggestion to rename it to the GetUserNameQuery and Quickfix for it
+  ///   public string GetUserName() // Suggestion to rename it to the 'GetUserNameQuery'
   ///   {
   ///     return Name;
   ///   }
@@ -2160,22 +2164,24 @@ namespace JetBrains.Annotations
   /// [CqrsCommandHandler]
   /// public class UserCommandHandler
   /// {
-  ///   void Handle(SetUserNameCommand command)
+  ///   public void Handle(SetUserNameCommand command)
   ///   {
-  ///     var query = new GetUserNameQuery() { Id = command.Id }; // Warning about using Query inside Command
+  ///     var query = new GetUserNameQuery() { Id = command.Id }; // Warning about Query use inside Command
   ///     var handler = new UserQuery(); // Warning about using Query inside Command
+  /// 
   ///     if (command.Name == handler.Handle(query)) // Warning about using Query inside Command
   ///       return;
-  ///     // ... implementation
+  /// 
+  ///     // ...
   ///   }
   /// }
   /// 
   /// [CqrsQueryHandler]
-  /// public class UserQuery // Suggestion to rename to the UserQueryHandler
+  /// public class UserQuery // Suggestion to rename to the 'UserQueryHandler'
   /// {
   ///   public string Handle(GetUserNameQuery query)
   ///   {
-  ///     return "";
+  ///     return ...;
   ///   }
   /// }
   /// </code></example>
@@ -2192,22 +2198,24 @@ namespace JetBrains.Annotations
   /// [CqrsCommandHandler]
   /// public class UserCommandHandler
   /// {
-  ///   void Handle(SetUserNameCommand command)
+  ///   public void Handle(SetUserNameCommand command)
   ///   {
   ///     var query = new GetUserNameQuery() { Id = command.Id }; // Warning about using Query inside Command
   ///     var handler = new UserQuery(); // Warning about using Query inside Command
+  /// 
   ///     if (command.Name == handler.Handle(query)) // Warning about using Query inside Command
   ///       return;
-  ///     // ... implementation
+  ///
+  ///     // ...
   ///   }
   /// }
   /// 
   /// [CqrsQueryHandler]
-  /// public class UserQuery // Suggestion to rename to the UserQueryHandler
+  /// public class UserQuery // Suggestion to rename to the 'UserQueryHandler'
   /// {
   ///   public string Handle(GetUserNameQuery query)
   ///   {
-  ///     return "";
+  ///     return ...;
   ///   }
   /// }
   /// </code></example>
@@ -2223,25 +2231,29 @@ namespace JetBrains.Annotations
   /// public class User
   /// {
   ///   private string Name;
+  /// 
   ///   [CqrsCommand]
-  ///   void SetUserNameCommand(string newName)
+  ///   public void SetUserNameCommand(string newName)
   ///   {
-  ///     if(newName == GetUserName()) // Warning about "GetUserName" is called from Command but belongs to the Query
+  ///     if (newName == GetUserName()) // Warning about 'GetUserName' being called from Command but belongs to the Query
   ///       return;
+  /// 
   ///     Name = newName;
   ///     CheckName();
   ///   }
   /// 
   ///   [CqrsQuery]
-  ///   string GetUserName() // Suggestion to rename it to the GetUserNameQuery and Quickfix for it
+  ///   public string GetUserName() // Suggestion to rename it to the 'GetUserNameQuery'
   ///   {
   ///     CheckName();
   ///     return Name;
   ///   }
   /// 
   ///   [CqrsExcludeFromAnalysis]
-  ///   bool CheckName() // Although this method is used both in Command and Query, will be ignored in all CQRS analyzes
-  ///   { ... }
+  ///   public bool CheckName() // Although this method is used both in Command and Query, will be ignored in all CQRS analyzes
+  ///   {
+  ///     ...
+  ///   }
   /// }
   /// </code></example>
   [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
