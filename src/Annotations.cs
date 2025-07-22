@@ -453,7 +453,7 @@ namespace JetBrains.Annotations
   /// equality comparer is passed to the constructor.
   /// </remarks>
   /// <example><code>
-  /// struct StructWithDefaultEquality { /* no Equals & GetHashCode override */ }
+  /// struct StructWithDefaultEquality { /* no Equals &amp; GetHashCode override */ }
   /// 
   /// class MySet&lt;[DefaultEqualityUsage] T&gt; { ... }
   /// 

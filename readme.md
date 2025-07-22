@@ -1,7 +1,8 @@
-[![official JetBrains project](http://jb.gg/badges/official-flat-square.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
-
 # JetBrains ReSharper Annotations
 
-ReSharper Annotations help reduce false positive warnings, explicitly declare purity and nullability in your code, deal with implicit usages of members, support special semantics of APIs in ASP.NET and XAML frameworks and otherwise increase accuracy of ReSharper code inspections.
+ReSharper Annotations help reduce false positive warnings, explicitly declare purity and nullability in your code, deal with implicit usages of types and members, support special semantics of the APIs in ASP.NET and XAML frameworks and otherwise increase the accuracy of the code inspections in JetBrains .NET IDEs.
 
-Available as a [nuget package](https://www.nuget.org/packages/JetBrains.Annotations).
+Available as an ordinary compiled [nuget package](https://www.nuget.org/packages/JetBrains.Annotations) and a [source-code only package](https://www.nuget.org/packages/JetBrains.Annotations.Sources).
+
+
+<a href="https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub"><img width="106" height="20" class="figure" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDYiIGhlaWdodD0iMjAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iSmV0QnJhaW5zOiBvZmZpY2lhbCI+PHRpdGxlPkpldEJyYWluczogb2ZmaWNpYWw8L3RpdGxlPjxnIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyI+PHJlY3Qgd2lkdGg9IjYxIiBoZWlnaHQ9IjIwIiBmaWxsPSIjMzAzMDMzIi8+PHJlY3QgeD0iNjEiIHdpZHRoPSI0NSIgaGVpZ2h0PSIyMCIgZmlsbD0iI2ZmOGEyYyIvPjwvZz48ZyBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0iVmVyZGFuYSxHZW5ldmEsRGVqYVZ1IFNhbnMsc2Fucy1zZXJpZiIgdGV4dC1yZW5kZXJpbmc9Imdlb21ldHJpY1ByZWNpc2lvbiIgZm9udC1zaXplPSIxMTAiPjx0ZXh0IHg9IjMxNSIgeT0iMTQwIiB0cmFuc2Zvcm09InNjYWxlKC4xKSIgZmlsbD0iI2ZmZiIgdGV4dExlbmd0aD0iNTEwIj5KZXRCcmFpbnM8L3RleHQ+PHRleHQgeD0iODI1IiB5PSIxNDAiIHRyYW5zZm9ybT0ic2NhbGUoLjEpIiBmaWxsPSIjZmZmIiB0ZXh0TGVuZ3RoPSIzNTAiPm9mZmljaWFsPC90ZXh0PjwvZz48L3N2Zz4=" /></a>
