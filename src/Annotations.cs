@@ -43,9 +43,10 @@ namespace JetBrains.Annotations
   /// so checking for <c>null</c> is required before its usage.
   /// </summary>
   /// <example><code>
-  /// [CanBeNull] object Test() => null;
+  /// [CanBeNull] object Test() { ... }
   /// 
-  /// void UseTest() {
+  /// void UseTest()
+  /// {
   ///   var p = Test();
   ///   var s = p.ToString(); // Warning: Possible 'System.NullReferenceException'
   /// }
@@ -54,14 +55,14 @@ namespace JetBrains.Annotations
     AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
     AttributeTargets.Delegate | AttributeTargets.Field | AttributeTargets.Event |
     AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.GenericParameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class CanBeNullAttribute : Attribute { }
 
   /// <summary>
   /// Indicates that the value of the marked element can never be <c>null</c>.
   /// </summary>
   /// <example><code>
-  /// [NotNull] object Foo() {
+  /// [NotNull] object Foo()
+  /// {
   ///   return null; // Warning: Possible 'null' assignment
   /// }
   /// </code></example>
@@ -69,7 +70,6 @@ namespace JetBrains.Annotations
     AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
     AttributeTargets.Delegate | AttributeTargets.Field | AttributeTargets.Event |
     AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.GenericParameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class NotNullAttribute : Attribute { }
 
   /// <summary>
@@ -80,16 +80,18 @@ namespace JetBrains.Annotations
   /// <example><code>
   /// public void Foo([ItemNotNull]List&lt;string&gt; books)
   /// {
-  ///   foreach (var book in books) {
+  ///   foreach (var book in books)
+  ///   {
   ///     if (book != null) // Warning: Expression is always true
-  ///      Console.WriteLine(book.ToUpper());
+  ///     {
+  ///       Console.WriteLine(book.ToUpper());
+  ///     }
   ///   }
   /// }
   /// </code></example>
   [AttributeUsage(
     AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
     AttributeTargets.Delegate | AttributeTargets.Field)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class ItemNotNullAttribute : Attribute { }
 
   /// <summary>
@@ -110,7 +112,6 @@ namespace JetBrains.Annotations
   [AttributeUsage(
     AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Property |
     AttributeTargets.Delegate | AttributeTargets.Field)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class ItemCanBeNullAttribute : Attribute { }
 
   /// <summary>
@@ -120,9 +121,10 @@ namespace JetBrains.Annotations
   /// </summary>
   /// <example><code>
   /// [StringFormatMethod("message")]
-  /// void ShowError(string message, params object[] args) { /* do something */ }
+  /// void ShowError(string message, params object[] args) { ... }
   /// 
-  /// void Foo() {
+  /// void Foo()
+  /// {
   ///   ShowError("Failed: {0}"); // Warning: Non-existing argument in format string
   /// }
   /// </code></example>
@@ -130,7 +132,6 @@ namespace JetBrains.Annotations
   [AttributeUsage(
     AttributeTargets.Constructor | AttributeTargets.Method |
     AttributeTargets.Property | AttributeTargets.Delegate)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class StringFormatMethodAttribute : Attribute
   {
     /// <param name="formatParameterName">
@@ -149,16 +150,16 @@ namespace JetBrains.Annotations
   /// the following arguments in the order in which they appear.
   /// </summary>
   /// <example><code>
-  /// void LogInfo([StructuredMessageTemplate]string message, params object[] args) { /* do something */ }
+  /// void LogInfo([StructuredMessageTemplate]string message, params object[] args) { ... }
   /// 
-  /// void Foo() {
+  /// void Foo()
+  /// {
   ///   LogInfo("User created: {username}"); // Warning: Non-existing argument in format string
   /// }
   /// </code></example>
   /// <seealso cref="StringFormatMethodAttribute"/>
   [AttributeUsage(AttributeTargets.Parameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
-  public sealed class StructuredMessageTemplateAttribute : Attribute {}
+  public sealed class StructuredMessageTemplateAttribute : Attribute { }
 
   /// <summary>
   /// Use this annotation to specify a type that contains static or const fields
@@ -190,7 +191,6 @@ namespace JetBrains.Annotations
   [AttributeUsage(
     AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Field,
     AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class ValueProviderAttribute : Attribute
   {
     public ValueProviderAttribute([NotNull] string name)
@@ -207,8 +207,10 @@ namespace JetBrains.Annotations
   /// Values of interval boundaries are included in the interval.
   /// </summary>
   /// <example><code>
-  /// void Foo([ValueRange(0, 100)] int value) {
-  ///   if (value == -1) { // Warning: Expression is always 'false'
+  /// void Foo([ValueRange(0, 100)] int value)
+  /// {
+  ///   if (value == -1) // Warning: Expression is always 'false'
+  ///   {
   ///     ...
   ///   }
   /// }
@@ -217,7 +219,6 @@ namespace JetBrains.Annotations
     AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property |
     AttributeTargets.Method | AttributeTargets.Delegate,
     AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class ValueRangeAttribute : Attribute
   {
     public object From { get; }
@@ -250,8 +251,10 @@ namespace JetBrains.Annotations
   /// Indicates that the integral value never falls below zero.
   /// </summary>
   /// <example><code>
-  /// void Foo([NonNegativeValue] int value) {
-  ///   if (value == -1) { // Warning: Expression is always 'false'
+  /// void Foo([NonNegativeValue] int value)
+  /// {
+  ///   if (value == -1) // Warning: Expression is always 'false'
+  ///   {
   ///     ...
   ///   }
   /// }
@@ -259,7 +262,6 @@ namespace JetBrains.Annotations
   [AttributeUsage(
     AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property |
     AttributeTargets.Method | AttributeTargets.Delegate)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class NonNegativeValueAttribute : Attribute { }
 
   /// <summary>
@@ -268,13 +270,13 @@ namespace JetBrains.Annotations
   /// like <c>string paramName</c> parameter of the <see cref="System.ArgumentNullException"/> constructor.
   /// </summary>
   /// <example><code>
-  /// void Foo(string param) {
+  /// void Foo(string param)
+  /// {
   ///   if (param == null)
   ///     throw new ArgumentNullException("par"); // Warning: Cannot resolve symbol
   /// }
   /// </code></example>
   [AttributeUsage(AttributeTargets.Parameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class InvokerParameterNameAttribute : Attribute { }
 
   /// <summary>
@@ -293,7 +295,8 @@ namespace JetBrains.Annotations
   /// </list>
   /// </remarks>
   /// <example><code>
-  /// public class Foo : INotifyPropertyChanged {
+  /// public class ObservableBase : INotifyPropertyChanged
+  /// {
   ///   public event PropertyChangedEventHandler PropertyChanged;
   /// 
   ///   [NotifyPropertyChangedInvocator]
@@ -301,7 +304,8 @@ namespace JetBrains.Annotations
   ///
   ///   string _name;
   /// 
-  ///   public string Name {
+  ///   public string Name
+  ///   {
   ///     get { return _name; }
   ///     set { _name = value; NotifyChanged("LastName"); /* Warning */ }
   ///   }
@@ -316,7 +320,6 @@ namespace JetBrains.Annotations
   /// </list>
   /// </example>
   [AttributeUsage(AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class NotifyPropertyChangedInvocatorAttribute : Attribute
   {
     public NotifyPropertyChangedInvocatorAttribute() { }
@@ -373,7 +376,6 @@ namespace JetBrains.Annotations
   /// </code></item>
   /// </list></examples>
   [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class ContractAnnotationAttribute : Attribute
   {
     public ContractAnnotationAttribute([NotNull] string contract)
@@ -395,12 +397,12 @@ namespace JetBrains.Annotations
   /// </summary>
   /// <example><code>
   /// [LocalizationRequiredAttribute(true)]
-  /// class Foo {
+  /// class Foo
+  /// {
   ///   string str = "my string"; // Warning: Localizable string
   /// }
   /// </code></example>
   [AttributeUsage(AttributeTargets.All)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class LocalizationRequiredAttribute : Attribute
   {
     public LocalizationRequiredAttribute() : this(true) { }
@@ -423,18 +425,20 @@ namespace JetBrains.Annotations
   /// [CannotApplyEqualityOperator]
   /// class NoEquality { }
   /// 
-  /// class UsesNoEquality {
-  ///   void Test() {
-  ///     var ca1 = new NoEquality();
-  ///     var ca2 = new NoEquality();
-  ///     if (ca1 != null) { // OK
-  ///       bool condition = ca1 == ca2; // Warning
+  /// class UsesNoEquality
+  /// {
+  ///   void Test()
+  ///   {
+  ///     var instance1 = new NoEquality();
+  ///     var instance2 = new NoEquality();
+  ///     if (instance1 != null) // OK
+  ///     {
+  ///       bool condition = instance1 == instance2; // Warning
   ///     }
   ///   }
   /// }
   /// </code></example>
   [AttributeUsage(AttributeTargets.Interface | AttributeTargets.Class | AttributeTargets.Struct)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class CannotApplyEqualityOperatorAttribute : Attribute { }
 
   /// <summary>
@@ -449,28 +453,38 @@ namespace JetBrains.Annotations
   /// equality comparer is passed to the constructor.
   /// </remarks>
   /// <example><code>
-  /// struct StructWithDefaultEquality { }
+  /// struct StructWithDefaultEquality { /* no Equals & GetHashCode override */ }
   /// 
-  /// class MySet&lt;[DefaultEqualityUsage] T&gt; { }
+  /// class MySet&lt;[DefaultEqualityUsage] T&gt; { ... }
   /// 
-  /// static class Extensions {
-  ///     public static MySet&lt;T&gt; ToMySet&lt;[DefaultEqualityUsage] T&gt;(this IEnumerable&lt;T&gt; items) =&gt; new();
+  /// static class Extensions
+  /// {
+  ///   public static MySet&lt;T&gt; ToMySet&lt;[DefaultEqualityUsage] T&gt;(this IEnumerable&lt;T&gt; items) { ... }
   /// }
   /// 
-  /// class MyList&lt;T&gt; { public int IndexOf([DefaultEqualityUsage] T item) =&gt; 0; }
+  /// class MyList&lt;T&gt;
+  /// {
+  ///   public int IndexOf([DefaultEqualityUsage] T item) { ... }
+  /// }
   /// 
-  /// class UsesDefaultEquality {
-  ///     void Test() {
-  ///         var list = new MyList&lt;StructWithDefaultEquality&gt;();
-  ///         list.IndexOf(new StructWithDefaultEquality()); // Warning: Default equality of struct 'StructWithDefaultEquality' is used
-  ///         
-  ///         var set = new MySet&lt;StructWithDefaultEquality&gt;(); // Warning: Default equality of struct 'StructWithDefaultEquality' is used
-  ///         var set2 = new StructWithDefaultEquality[1].ToMySet(); // Warning: Default equality of struct 'StructWithDefaultEquality' is used
-  ///     }
+  /// class UsesDefaultEquality
+  /// {
+  ///   void Test()
+  ///   {
+  ///     var list = new MyList&lt;StructWithDefaultEquality&gt;();
+  ///
+  ///     // Warning: Default equality of struct 'StructWithDefaultEquality' is used
+  ///     list.IndexOf(new StructWithDefaultEquality());
+  ///
+  ///     // Warning: Default equality of struct 'StructWithDefaultEquality' is used
+  ///     var set1 = new MySet&lt;StructWithDefaultEquality&gt;();
+  ///
+  ///     // Warning: Default equality of struct 'StructWithDefaultEquality' is used
+  ///     var set2 = new StructWithDefaultEquality[1].ToMySet();
+  ///   }
   /// }
   /// </code></example>
   [AttributeUsage(AttributeTargets.GenericParameter | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class DefaultEqualityUsageAttribute : Attribute { }
 
   /// <summary>
@@ -486,7 +500,6 @@ namespace JetBrains.Annotations
   /// </code></example>
   [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
   [BaseTypeRequired(typeof(Attribute))]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class BaseTypeRequiredAttribute : Attribute
   {
     public BaseTypeRequiredAttribute([NotNull] Type baseType)
@@ -505,19 +518,18 @@ namespace JetBrains.Annotations
   /// </summary>
   /// <example><code>
   /// [UsedImplicitly]
-  /// public class TypeConverter {}
+  /// public class TypeConverter { }
   /// 
   /// public class SummaryData
   /// {
   ///   [UsedImplicitly(ImplicitUseKindFlags.InstantiatedWithFixedConstructorSignature)]
-  ///   public SummaryData() {}
+  ///   public SummaryData() { }
   /// }
   /// 
   /// [UsedImplicitly(ImplicitUseTargetFlags.WithInheritors | ImplicitUseTargetFlags.Default)]
-  /// public interface IService {}
+  /// public interface IService { }
   /// </code></example>
   [AttributeUsage(AttributeTargets.All)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class UsedImplicitlyAttribute : Attribute
   {
     public UsedImplicitlyAttribute()
@@ -549,7 +561,6 @@ namespace JetBrains.Annotations
   /// indicates that the corresponding type is used implicitly.
   /// </summary>
   [AttributeUsage(AttributeTargets.Class | AttributeTargets.GenericParameter | AttributeTargets.Parameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class MeansImplicitUseAttribute : Attribute
   {
     public MeansImplicitUseAttribute()
@@ -580,15 +591,19 @@ namespace JetBrains.Annotations
   public enum ImplicitUseKindFlags
   {
     Default = Access | Assign | InstantiatedWithFixedConstructorSignature,
+
     /// <summary>Only entity marked with attribute considered used.</summary>
     Access = 1,
+
     /// <summary>Indicates implicit assignment to a member.</summary>
     Assign = 2,
+
     /// <summary>
-    /// Indicates implicit instantiation of a type with fixed constructor signature.
+    /// Indicates implicit instantiation of a type with a fixed constructor signature.
     /// That means any unused constructor parameters will not be reported as such.
     /// </summary>
     InstantiatedWithFixedConstructorSignature = 4,
+
     /// <summary>Indicates implicit instantiation of a type.</summary>
     InstantiatedNoFixedConstructorSignature = 8,
   }
@@ -601,11 +616,16 @@ namespace JetBrains.Annotations
   public enum ImplicitUseTargetFlags
   {
     Default = Itself,
+
+    /// <summary>Code entity itself.</summary>
     Itself = 1,
+
     /// <summary>Members of the type marked with the attribute are considered used.</summary>
     Members = 2,
+
     /// <summary> Inherited entities are considered used. </summary>
     WithInheritors = 4,
+
     /// <summary>Entity marked with the attribute and all its members considered used.</summary>
     WithMembers = Itself | Members
   }
@@ -616,7 +636,6 @@ namespace JetBrains.Annotations
   /// </summary>
   [MeansImplicitUse(ImplicitUseTargetFlags.WithMembers)]
   [AttributeUsage(AttributeTargets.All, Inherited = false)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class PublicAPIAttribute : Attribute
   {
     public PublicAPIAttribute() { }
@@ -639,7 +658,6 @@ namespace JetBrains.Annotations
   /// if the method invocation is located under the <c>await</c> expression.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class InstantHandleAttribute : Attribute
   {
     /// <summary>
@@ -656,12 +674,12 @@ namespace JetBrains.Annotations
   /// <example><code>
   /// [Pure] int Multiply(int x, int y) => x * y;
   /// 
-  /// void M() {
+  /// void M()
+  /// {
   ///   Multiply(123, 42); // Warning: Return value of pure method is not used
   /// }
   /// </code></example>
   [AttributeUsage(AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class PureAttribute : Attribute { }
 
   /// <summary>
@@ -676,7 +694,6 @@ namespace JetBrains.Annotations
   /// <code>[MustUseReturnValue("Use the return value to...")]</code>.
   /// </remarks>
   [AttributeUsage(AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class MustUseReturnValueAttribute : Attribute
   {
     public MustUseReturnValueAttribute() { }
@@ -720,7 +737,6 @@ namespace JetBrains.Annotations
   [AttributeUsage(
     AttributeTargets.Class | AttributeTargets.Struct |
     AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Parameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class MustDisposeResourceAttribute : Attribute
   {
     public MustDisposeResourceAttribute()
@@ -742,7 +758,7 @@ namespace JetBrains.Annotations
   }
 
   /// <summary>
-  /// Indicates that method or class instance acquires resource ownership and will dispose it after use.
+  /// Indicates that the method or class instance acquires resource ownership and will dispose it after use.
   /// </summary>
   /// <remarks>
   /// Annotation of <c>out</c> parameters with this attribute is meaningless.<br/>
@@ -753,7 +769,6 @@ namespace JetBrains.Annotations
   /// </remarks>
   [AttributeUsage(
     AttributeTargets.Method | AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class HandlesResourceDisposalAttribute : Attribute { }
 
   /// <summary>
@@ -771,7 +786,6 @@ namespace JetBrains.Annotations
   /// to make use of the similar analysis provided by the language/compiler.
   /// </remarks>
   [AttributeUsage(AttributeTargets.Parameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class RequireStaticDelegateAttribute : Attribute
   {
     public bool IsError { get; set; }
@@ -783,10 +797,12 @@ namespace JetBrains.Annotations
   /// and stored somewhere, meaning that all other ways to get this value must be consolidated with the existing one.
   /// </summary>
   /// <example><code>
-  /// class Foo {
+  /// class Foo
+  /// {
   ///   [ProvidesContext] IBarService _barService = ...;
   /// 
-  ///   void ProcessNode(INode node) {
+  ///   void ProcessNode(INode node)
+  ///   {
   ///     DoSomething(node, node.GetGlobalServices().Bar);
   ///     //              ^ Warning: use value of '_barService' field
   ///   }
@@ -795,7 +811,6 @@ namespace JetBrains.Annotations
   [AttributeUsage(
     AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.Method |
     AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.GenericParameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class ProvidesContextAttribute : Attribute { }
 
   /// <summary>
@@ -803,7 +818,6 @@ namespace JetBrains.Annotations
   /// Path can be relative or absolute, starting from web root (~).
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class PathReferenceAttribute : Attribute
   {
     public PathReferenceAttribute() { }
@@ -834,15 +848,16 @@ namespace JetBrains.Annotations
   /// of enumerable types, producing an ordinary C# <c>foreach</c> statement and placing the caret inside the block:
   /// <code>
   /// [SourceTemplate]
-  /// public static void forEach&lt;T&gt;(this IEnumerable&lt;T&gt; xs) {
-  ///   foreach (var x in xs) {
-  ///      //$ $END$
+  /// public static void forEach&lt;T&gt;(this IEnumerable&lt;T&gt; xs)
+  /// {
+  ///   foreach (var x in xs)
+  ///   {
+  ///     //$ $END$
   ///   }
   /// }
   /// </code>
   /// </example>
   [AttributeUsage(AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class SourceTemplateAttribute : Attribute
   {
     /// <summary>
@@ -883,8 +898,10 @@ namespace JetBrains.Annotations
   /// Applying the attribute to a source template method:
   /// <code>
   /// [SourceTemplate, Macro(Target = "item", Expression = "suggestVariableName()")]
-  /// public static void forEach&lt;T&gt;(this IEnumerable&lt;T&gt; collection) {
-  ///   foreach (var item in collection) {
+  /// public static void forEach&lt;T&gt;(this IEnumerable&lt;T&gt; collection)
+  /// {
+  ///   foreach (var item in collection)
+  ///   {
   ///     //$ $END$
   ///   }
   /// }
@@ -892,14 +909,14 @@ namespace JetBrains.Annotations
   /// Applying the attribute to a template method parameter:
   /// <code>
   /// [SourceTemplate]
-  /// public static void something(this Entity x, [Macro(Expression = "guid()", Editable = -1)] string newguid) {
+  /// public static void something(this Entity x, [Macro(Expression = "guid()", Editable = -1)] string newguid)
+  /// {
   ///   /*$ var $x$Id = "$newguid$" + x.ToString();
   ///   x.DoSomething($x$Id); */
   /// }
   /// </code>
   /// </example>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class MacroAttribute : Attribute
   {
     /// <summary>
@@ -945,6 +962,7 @@ namespace JetBrains.Annotations
   ///     return this.ElementAt(0);
   ///   }
   /// }
+  ///
   /// class Test
   /// {
   ///   public void Foo()
@@ -956,7 +974,6 @@ namespace JetBrains.Annotations
   /// }
   /// </code></example>
   [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Property | AttributeTargets.ReturnValue)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class CollectionAccessAttribute : Attribute
   {
     public CollectionAccessAttribute(CollectionAccessType collectionAccessType)
@@ -974,12 +991,15 @@ namespace JetBrains.Annotations
   [Flags]
   public enum CollectionAccessType
   {
-    /// <summary>Method does not use or modify content of the collection.</summary>
+    /// <summary>Method does not use or modify the content of the collection.</summary>
     None = 0,
-    /// <summary>Method only reads content of the collection but does not modify it.</summary>
+
+    /// <summary>Method only reads the content of the collection but does not modify it.</summary>
     Read = 1,
-    /// <summary>Method can change content of the collection but does not add new elements.</summary>
+
+    /// <summary>Method can change the content of the collection but does not add new elements.</summary>
     ModifyExistingContent = 2,
+
     /// <summary>Method can add new elements to the collection.</summary>
     UpdatedContent = ModifyExistingContent | 4
   }
@@ -990,7 +1010,6 @@ namespace JetBrains.Annotations
   /// <see cref="AssertionConditionAttribute"/> attribute.
   /// </summary>
   [AttributeUsage(AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AssertionMethodAttribute : Attribute { }
 
   /// <summary>
@@ -999,7 +1018,6 @@ namespace JetBrains.Annotations
   /// the attribute is the assertion type.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AssertionConditionAttribute : Attribute
   {
     public AssertionConditionAttribute(AssertionConditionType conditionType)
@@ -1018,10 +1036,13 @@ namespace JetBrains.Annotations
   {
     /// <summary>Marked parameter should be evaluated to true.</summary>
     IS_TRUE = 0,
+
     /// <summary>Marked parameter should be evaluated to false.</summary>
     IS_FALSE = 1,
+
     /// <summary>Marked parameter should be evaluated to null value.</summary>
     IS_NULL = 2,
+
     /// <summary>Marked parameter should be evaluated to not null value.</summary>
     IS_NOT_NULL = 3,
   }
@@ -1032,7 +1053,6 @@ namespace JetBrains.Annotations
   /// </summary>
   [Obsolete("Use [ContractAnnotation('=> halt')] instead")]
   [AttributeUsage(AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class TerminatesProgramAttribute : Attribute { }
 
   /// <summary>
@@ -1041,7 +1061,6 @@ namespace JetBrains.Annotations
   /// of delegate type by analyzing LINQ method chains.
   /// </summary>
   [AttributeUsage(AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class LinqTunnelAttribute : Attribute { }
 
   /// <summary>
@@ -1061,14 +1080,12 @@ namespace JetBrains.Annotations
   /// }
   /// </code></example>
   [AttributeUsage(AttributeTargets.Parameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class NoEnumerationAttribute : Attribute { }
 
   /// <summary>
   /// Indicates that the marked parameter, field, or property is a regular expression pattern.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class RegexPatternAttribute : Attribute { }
 
   /// <summary>
@@ -1099,7 +1116,6 @@ namespace JetBrains.Annotations
   /// }
   /// </code></example>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.ReturnValue)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class LanguageInjectionAttribute : Attribute
   {
     public LanguageInjectionAttribute(InjectedLanguage injectedLanguage)
@@ -1112,16 +1128,16 @@ namespace JetBrains.Annotations
       InjectedLanguageName = injectedLanguage;
     }
 
-    /// <summary>Specifies a language of the injected code fragment.</summary>
+    /// <summary>Specifies the language of the injected code fragment.</summary>
     public InjectedLanguage InjectedLanguage { get; }
 
-    /// <summary>Specifies a language name of the injected code fragment.</summary>
+    /// <summary>Specifies the language name of the injected code fragment.</summary>
     [CanBeNull] public string InjectedLanguageName { get; }
 
-    /// <summary>Specifies a string that 'precedes' the injected string literal.</summary>
+    /// <summary>Specifies the string that 'precedes' the injected string literal.</summary>
     [CanBeNull] public string Prefix { get; set; }
 
-    /// <summary>Specifies a string that 'follows' the injected string literal.</summary>
+    /// <summary>Specifies the string that 'follows' the injected string literal.</summary>
     [CanBeNull] public string Suffix { get; set; }
   }
 
@@ -1133,7 +1149,6 @@ namespace JetBrains.Annotations
   /// </remarks>
   [AttributeUsage(
     AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct | AttributeTargets.Enum, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class NoReorderAttribute : Attribute { }
 
   /// <summary>
@@ -1290,18 +1305,11 @@ namespace JetBrains.Annotations
   /// <seealso href="https://www.jetbrains.com/help/resharper/Code_Analysis__Find_and_Update_Obsolete_APIs.html">
   /// Find and update deprecated APIs</seealso>
   [AttributeUsage(
-    AttributeTargets.Method
-    | AttributeTargets.Constructor
-    | AttributeTargets.Property
-    | AttributeTargets.Field
-    | AttributeTargets.Event
-    | AttributeTargets.Interface
-    | AttributeTargets.Class
-    | AttributeTargets.Struct
-    | AttributeTargets.Enum,
+    AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Property |
+    AttributeTargets.Field | AttributeTargets.Event | AttributeTargets.Interface |
+    AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Enum,
     AllowMultiple = true,
     Inherited = false)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class CodeTemplateAttribute : Attribute
   {
     public CodeTemplateAttribute(string searchTemplate)
@@ -1369,15 +1377,11 @@ namespace JetBrains.Annotations
   /// should not be checked for spelling or grammar errors.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
-  public sealed class IgnoreSpellingAndGrammarErrorsAttribute : Attribute
-  {
-  }
+  public sealed class IgnoreSpellingAndGrammarErrorsAttribute : Attribute { }
 
   #region ASP.NET
 
   [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspChildControlTypeAttribute : Attribute
   {
     public AspChildControlTypeAttribute([NotNull] string tagName, [NotNull] Type controlType)
@@ -1392,19 +1396,15 @@ namespace JetBrains.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspDataFieldAttribute : Attribute { }
 
   [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspDataFieldsAttribute : Attribute { }
 
   [AttributeUsage(AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMethodPropertyAttribute : Attribute { }
 
   [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspRequiredAttributeAttribute : Attribute
   {
     public AspRequiredAttributeAttribute([NotNull] string attribute)
@@ -1416,7 +1416,6 @@ namespace JetBrains.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspTypePropertyAttribute : Attribute
   {
     public bool CreateConstructorReferences { get; }
@@ -1432,7 +1431,6 @@ namespace JetBrains.Annotations
   #region ASP.NET MVC
 
   [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcAreaMasterLocationFormatAttribute : Attribute
   {
     public AspMvcAreaMasterLocationFormatAttribute([NotNull] string format)
@@ -1444,7 +1442,6 @@ namespace JetBrains.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcAreaPartialViewLocationFormatAttribute : Attribute
   {
     public AspMvcAreaPartialViewLocationFormatAttribute([NotNull] string format)
@@ -1456,7 +1453,6 @@ namespace JetBrains.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcAreaViewComponentViewLocationFormatAttribute : Attribute
   {
     public AspMvcAreaViewComponentViewLocationFormatAttribute([NotNull] string format)
@@ -1468,7 +1464,6 @@ namespace JetBrains.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcAreaViewLocationFormatAttribute : Attribute
   {
     public AspMvcAreaViewLocationFormatAttribute([NotNull] string format)
@@ -1480,7 +1475,6 @@ namespace JetBrains.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcMasterLocationFormatAttribute : Attribute
   {
     public AspMvcMasterLocationFormatAttribute([NotNull] string format)
@@ -1492,7 +1486,6 @@ namespace JetBrains.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcPartialViewLocationFormatAttribute : Attribute
   {
     public AspMvcPartialViewLocationFormatAttribute([NotNull] string format)
@@ -1504,7 +1497,6 @@ namespace JetBrains.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcViewComponentViewLocationFormatAttribute : Attribute
   {
     public AspMvcViewComponentViewLocationFormatAttribute([NotNull] string format)
@@ -1516,7 +1508,6 @@ namespace JetBrains.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcViewLocationFormatAttribute : Attribute
   {
     public AspMvcViewLocationFormatAttribute([NotNull] string format)
@@ -1534,7 +1525,6 @@ namespace JetBrains.Annotations
   /// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcActionAttribute : Attribute
   {
     public AspMvcActionAttribute() { }
@@ -1553,7 +1543,6 @@ namespace JetBrains.Annotations
   /// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcAreaAttribute : Attribute
   {
     public AspMvcAreaAttribute() { }
@@ -1573,7 +1562,6 @@ namespace JetBrains.Annotations
   /// <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String, String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcControllerAttribute : Attribute
   {
     public AspMvcControllerAttribute() { }
@@ -1591,7 +1579,6 @@ namespace JetBrains.Annotations
   /// for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcMasterAttribute : Attribute { }
 
   /// <summary>
@@ -1599,7 +1586,6 @@ namespace JetBrains.Annotations
   /// for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, Object)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcModelTypeAttribute : Attribute { }
 
   /// <summary>
@@ -1609,14 +1595,12 @@ namespace JetBrains.Annotations
   /// <c>System.Web.Mvc.Html.RenderPartialExtensions.RenderPartial(HtmlHelper, String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcPartialViewAttribute : Attribute { }
 
   /// <summary>
   /// ASP.NET MVC attribute. Allows disabling inspections for MVC views within a class or a method.
   /// </summary>
   [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcSuppressViewErrorAttribute : Attribute { }
 
   /// <summary>
@@ -1625,7 +1609,6 @@ namespace JetBrains.Annotations
   /// <c>System.Web.Mvc.Html.DisplayExtensions.DisplayForModel(HtmlHelper, String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcDisplayTemplateAttribute : Attribute { }
 
   /// <summary>
@@ -1634,7 +1617,6 @@ namespace JetBrains.Annotations
   /// <c>System.Web.Mvc.Html.EditorExtensions.EditorForModel(HtmlHelper, String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcEditorTemplateAttribute : Attribute { }
 
   /// <summary>
@@ -1643,7 +1625,6 @@ namespace JetBrains.Annotations
   /// <c>System.ComponentModel.DataAnnotations.UIHintAttribute(System.String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcTemplateAttribute : Attribute { }
 
   /// <summary>
@@ -1653,7 +1634,6 @@ namespace JetBrains.Annotations
   /// <c>System.Web.Mvc.Controller.View(Object)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcViewAttribute : Attribute { }
 
   /// <summary>
@@ -1661,7 +1641,6 @@ namespace JetBrains.Annotations
   /// is an MVC view component name.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcViewComponentAttribute : Attribute { }
 
   /// <summary>
@@ -1669,7 +1648,6 @@ namespace JetBrains.Annotations
   /// is an MVC view component view. If applied to a method, the MVC view component view name is default.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcViewComponentViewAttribute : Attribute { }
 
   /// <summary>
@@ -1678,13 +1656,13 @@ namespace JetBrains.Annotations
   /// </summary>
   /// <example><code>
   /// [ActionName("Foo")]
-  /// public ActionResult Login(string returnUrl) {
+  /// public ActionResult Login(string returnUrl)
+  /// {
   ///   ViewBag.ReturnUrl = Url.Action("Foo"); // OK
   ///   return RedirectToAction("Bar"); // Error: Cannot resolve action
   /// }
   /// </code></example>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMvcActionSelectorAttribute : Attribute { }
 
   #endregion
@@ -1699,7 +1677,6 @@ namespace JetBrains.Annotations
   /// to enable syntax highlighting, code completion, navigation, rename and other features in string literals.
   /// </remarks>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class RouteTemplateAttribute : Attribute { }
 
   /// <summary>
@@ -1713,7 +1690,6 @@ namespace JetBrains.Annotations
   /// and check if constraint's proposed type conflicts with matched parameter's type.
   /// </remarks>
   [AttributeUsage(AttributeTargets.Class)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class RouteParameterConstraintAttribute : Attribute
   {
     [NotNull] public string ConstraintName { get; }
@@ -1733,7 +1709,6 @@ namespace JetBrains.Annotations
   /// in URI string literals assigned to annotated parameters, fields, or properties.
   /// </remarks>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class UriStringAttribute : Attribute
   {
     public UriStringAttribute() { }
@@ -1754,7 +1729,6 @@ namespace JetBrains.Annotations
   /// and will add all routes to completion, navigation, and other features over URI strings.
   /// </remarks>
   [AttributeUsage(AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspRouteConventionAttribute : Attribute
   {
     public AspRouteConventionAttribute() { }
@@ -1771,28 +1745,24 @@ namespace JetBrains.Annotations
   /// Indicates that the marked method parameter contains default route values of routing convention for ASP.NET.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspDefaultRouteValuesAttribute : Attribute { }
 
   /// <summary>
   /// Indicates that the marked method parameter contains constraints on route values of routing convention for ASP.NET.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspRouteValuesConstraintsAttribute : Attribute { }
 
   /// <summary>
   /// Indicates that the marked parameter or property contains routing order provided by ASP.NET routing attribute.
   /// </summary>
   [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspRouteOrderAttribute : Attribute { }
 
   /// <summary>
   /// Indicates that the marked parameter or property contains HTTP verbs provided by ASP.NET routing attribute.
   /// </summary>
   [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspRouteVerbsAttribute : Attribute { }
 
   /// <summary>
@@ -1803,7 +1773,6 @@ namespace JetBrains.Annotations
   /// and will add all routes to completion, navigation and other features over URI strings.
   /// </remarks>
   [AttributeUsage(AttributeTargets.Class)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspAttributeRoutingAttribute : Attribute
   {
     public string HttpVerb { get; set; }
@@ -1817,7 +1786,6 @@ namespace JetBrains.Annotations
   /// and will add all routes to completion, navigation and other features over URI strings.
   /// </remarks>
   [AttributeUsage(AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMinimalApiDeclarationAttribute : Attribute
   {
     public string HttpVerb { get; set; }
@@ -1827,14 +1795,12 @@ namespace JetBrains.Annotations
   /// Indicates that the marked method declares an ASP.NET Minimal API endpoints group.
   /// </summary>
   [AttributeUsage(AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMinimalApiGroupAttribute : Attribute { }
 
   /// <summary>
   /// Indicates that the marked parameter contains an ASP.NET Minimal API endpoint handler.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMinimalApiHandlerAttribute : Attribute { }
 
   /// <summary>
@@ -1845,7 +1811,6 @@ namespace JetBrains.Annotations
   /// and will add all declared in attributes routes to completion, navigation and other features over URI strings.
   /// </remarks>
   [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class AspMinimalApiImplicitEndpointDeclarationAttribute : Attribute
   {
     public string HttpVerb { get; set; }
@@ -1865,7 +1830,6 @@ namespace JetBrains.Annotations
   #region Razor
 
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Field)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class HtmlElementAttributesAttribute : Attribute
   {
     public HtmlElementAttributesAttribute() { }
@@ -1879,7 +1843,6 @@ namespace JetBrains.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class HtmlAttributeValueAttribute : Attribute
   {
     public HtmlAttributeValueAttribute([NotNull] string name)
@@ -1896,11 +1859,9 @@ namespace JetBrains.Annotations
   /// <c>System.Web.WebPages.WebPageBase.RenderSection(String)</c>.
   /// </summary>
   [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class RazorSectionAttribute : Attribute { }
 
   [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class RazorImportNamespaceAttribute : Attribute
   {
     public RazorImportNamespaceAttribute([NotNull] string name)
@@ -1912,7 +1873,6 @@ namespace JetBrains.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class RazorInjectionAttribute : Attribute
   {
     public RazorInjectionAttribute([NotNull] string type, [NotNull] string fieldName)
@@ -1927,7 +1887,6 @@ namespace JetBrains.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class RazorDirectiveAttribute : Attribute
   {
     public RazorDirectiveAttribute([NotNull] string directive)
@@ -1939,7 +1898,6 @@ namespace JetBrains.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class RazorPageBaseTypeAttribute : Attribute
   {
       public RazorPageBaseTypeAttribute([NotNull] string baseType)
@@ -1957,23 +1915,18 @@ namespace JetBrains.Annotations
   }
 
   [AttributeUsage(AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class RazorHelperCommonAttribute : Attribute { }
 
   [AttributeUsage(AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class RazorLayoutAttribute : Attribute { }
 
   [AttributeUsage(AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class RazorWriteLiteralMethodAttribute : Attribute { }
 
   [AttributeUsage(AttributeTargets.Method)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class RazorWriteMethodAttribute : Attribute { }
 
   [AttributeUsage(AttributeTargets.Parameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class RazorWriteMethodParameterAttribute : Attribute { }
 
   #endregion
@@ -1985,7 +1938,6 @@ namespace JetBrains.Annotations
   /// as an <c>ItemsControl</c>-derived type, to enable inner items <c>DataContext</c> type resolution.
   /// </summary>
   [AttributeUsage(AttributeTargets.Class)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class XamlItemsControlAttribute : Attribute { }
 
   /// <summary>
@@ -1998,7 +1950,6 @@ namespace JetBrains.Annotations
   /// marked with the <see cref="XamlItemsControlAttribute"/> attribute.
   /// </remarks>
   [AttributeUsage(AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class XamlItemBindingOfItemsControlAttribute : Attribute { }
 
   /// <summary>
@@ -2011,27 +1962,26 @@ namespace JetBrains.Annotations
   /// marked with the <see cref="XamlItemsControlAttribute"/> attribute.
   /// </remarks>
   [AttributeUsage(AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class XamlItemStyleOfItemsControlAttribute : Attribute { }
 
   /// <summary>
   /// XAML attribute. Indicates that DependencyProperty has <c>OneWay</c> binding mode by default.
   /// </summary>
   /// <remarks>
-  /// This attribute must be applied to DependencyProperty's CLR accessor property if it is present, or to a DependencyProperty descriptor field otherwise.
+  /// This attribute must be applied to DependencyProperty's CLR accessor property if it is present,
+  /// or to a DependencyProperty descriptor field otherwise.
   /// </remarks>
   [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class XamlOneWayBindingModeByDefaultAttribute : Attribute { }
 
   /// <summary>
   /// XAML attribute. Indicates that DependencyProperty has <c>TwoWay</c> binding mode by default.
   /// </summary>
   /// <remarks>
-  /// This attribute must be applied to DependencyProperty's CLR accessor property if it is present, or to a DependencyProperty descriptor field otherwise.
+  /// This attribute must be applied to DependencyProperty's CLR accessor property if it is present,
+  /// or to a DependencyProperty descriptor field otherwise.
   /// </remarks>
   [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class XamlTwoWayBindingModeByDefaultAttribute : Attribute { }
 
   #endregion
@@ -2045,8 +1995,10 @@ namespace JetBrains.Annotations
   /// This information can be used by the IDE to navigate between tests and tested types,
   /// or by test runners to group tests by subject and to provide better test reports.
   /// </remarks>
-  [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
+  [AttributeUsage(
+    AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Class |
+    AttributeTargets.Interface,
+    AllowMultiple = true)]
   public sealed class TestSubjectAttribute : Attribute
   {
     /// <summary>
@@ -2084,12 +2036,11 @@ namespace JetBrains.Annotations
   ///   [Test]
   ///   public void Should_add_two_numbers()
   ///   {
-  ///      Assert.That(Component.Add(2, 3), Is.EqualTo(5));
+  ///     Assert.That(Component.Add(2, 3), Is.EqualTo(5));
   ///   }
   /// }
   /// </code></example>
   [AttributeUsage(AttributeTargets.GenericParameter)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class MeansTestSubjectAttribute : Attribute { }
 
   #endregion
@@ -2121,9 +2072,9 @@ namespace JetBrains.Annotations
   ///   }
   /// }
   /// </code></example>
-  [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
-                  AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
+  [AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
+    AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property)]
   public sealed class CqrsCommandAttribute : Attribute { }
 
   /// <summary>
@@ -2151,9 +2102,9 @@ namespace JetBrains.Annotations
   ///   }
   /// }
   /// </code></example>
-  [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
-                  AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
+  [AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
+    AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property)]
   public sealed class CqrsQueryAttribute : Attribute { }
 
   /// <summary>
@@ -2185,9 +2136,9 @@ namespace JetBrains.Annotations
   ///   }
   /// }
   /// </code></example>
-  [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
-                  AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
+  [AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
+    AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property)]
   public sealed class CqrsCommandHandlerAttribute : Attribute { }
 
   /// <summary>
@@ -2219,13 +2170,13 @@ namespace JetBrains.Annotations
   ///   }
   /// }
   /// </code></example>
-  [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
-                  AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
+  [AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
+    AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property)]
   public sealed class CqrsQueryHandlerAttribute : Attribute { }
 
   /// <summary>
-  /// Indicates that marked element must be excluded from CQRS-related analyzes.
+  /// Indicates that the marked element must be excluded from CQRS-related analysis.
   /// </summary>
   /// <example><code>
   /// public class User
@@ -2256,9 +2207,9 @@ namespace JetBrains.Annotations
   ///   }
   /// }
   /// </code></example>
-  [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
-                  AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property)]
-  [Conditional("JETBRAINS_ANNOTATIONS")]
+  [AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface |
+    AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property)]
   public sealed class CqrsExcludeFromAnalysisAttribute : Attribute { }
 
   #endregion

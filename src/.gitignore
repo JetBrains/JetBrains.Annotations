@@ -1,5 +1,5 @@
-/bin/
-/obj/
+**/bin/
+**/obj/
 /.vs/
 *.snk
 /.idea/
