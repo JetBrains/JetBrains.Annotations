@@ -1,0 +1,5 @@
+﻿<Solution>
+  <Project Path="JetBrains.Annotations.csproj" />
+  <Project Path="PublicToInternalGenerator\PublicToInternalGenerator.csproj" Type="Classic C#" />
+  <Project Path="Sources\JetBrains.Annotations.Sources.csproj" Type="Classic C#" />
+</Solution>

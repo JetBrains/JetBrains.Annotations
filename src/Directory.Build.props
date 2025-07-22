@@ -1,0 +1,48 @@
+<Project>
+  <PropertyGroup>
+    <Company>JetBrains</Company>
+    <Product>JetBrains .NET Platform</Product>
+    <Authors>JetBrains</Authors>
+    <Copyright>Copyright (c) 2016-2025 JetBrains s.r.o.</Copyright>
+    <PackageProjectUrl>https://www.jetbrains.com/help/resharper/Code_Analysis__Code_Annotations.html</PackageProjectUrl>
+    <PackageGitUrl>https://github.com/JetBrains/JetBrains.Annotations.git2</PackageGitUrl>
+
+    <PackageSummary>Annotations to increase accuracy of JetBrains Rider and ReSharper code inspections</PackageSummary>
+    <Description>
+        JetBrains.Annotations help reduce false positive warnings, explicitly declare purity and nullability in your code, deal with implicit usages of members, support special semantics of APIs in ASP.NET and XAML frameworks and otherwise increase accuracy of JetBrains Rider and ReSharper code inspections.
+    </Description>
+    <PackageTags>jetbrains resharper rider annotations canbenull notnull</PackageTags>
+
+    <!-- Annotations version guidelines:
+        Use 3 version numbers to follow semver guidelines
+        Use 'eap' <VersionSuffix> for EAP builds of annotations
+        MAJOR and MINOR version numbers should match latest ReSharper version (to avoid confusion),
+        PATCH version may vary during development and EAPs -->
+    <VersionPrefix>2025.2.0</VersionPrefix>
+<!--    <VersionSuffix>eap4</VersionSuffix>-->
+
+    <PackageReleaseNotes>
+&#8226; Added DefaultEqualityUsageAttribute for equality members usage analysis.
+&#8226; MustDisposeResourceAttribute is now allowed on struct types.
+&#8226; Added the ability to specify the description for UsedImplicitlyAttribute (new 'Reason' property).
+&#8226; Added CqrsCommandAttribute, CqrsQueryAttribute, CqrsCommandHandlerAttribute, CqrsQueryHandlerAttribute and CqrsExcludeFromAnalysisAttribute to support CQRS analyzes of naming and adherence to the pattern.
+    </PackageReleaseNotes>
+
+    <Version Condition="'$(VersionSuffix)' != ''">$(VersionPrefix)-$(VersionSuffix)</Version>
+    <Version Condition="'$(Version)' == ''">$(VersionPrefix)</Version>
+
+    <!-- packaging -->
+    <NuspecProperties>$(NuspecProperties);id=$(AssemblyName)</NuspecProperties>
+    <NuspecProperties>$(NuspecProperties);title=$(AssemblyTitle)</NuspecProperties>
+    <NuspecProperties>$(NuspecProperties);version=$(Version)</NuspecProperties>
+    <NuspecProperties>$(NuspecProperties);configuration=$(Configuration)</NuspecProperties>
+    <NuspecProperties>$(NuspecProperties);authors=$(Authors)</NuspecProperties>
+    <NuspecProperties>$(NuspecProperties);copyright=$(Copyright)</NuspecProperties>
+    <NuspecProperties>$(NuspecProperties);projectUrl=$(PackageProjectUrl)</NuspecProperties>
+    <NuspecProperties>$(NuspecProperties);projectGit=$(PackageGitUrl)</NuspecProperties>
+    <NuspecProperties>$(NuspecProperties);summary=$(PackageSummary)</NuspecProperties>
+    <NuspecProperties>$(NuspecProperties);description=$(Description)</NuspecProperties>
+    <NuspecProperties>$(NuspecProperties);releaseNotes=$(PackageReleaseNotes)</NuspecProperties>
+    <NuspecProperties>$(NuspecProperties);tags=$(PackageTags)</NuspecProperties>
+  </PropertyGroup>
+</Project>

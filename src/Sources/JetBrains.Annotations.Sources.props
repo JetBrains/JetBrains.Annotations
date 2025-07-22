@@ -1,0 +1,8 @@
+<Project>
+  <!-- Hide annotations files from Visual Studio Solution Explorer -->
+  <ItemGroup>
+    <Compile Update="@(Compile)">
+      <Visible Condition="'%(NuGetItemType)' == 'Compile' and '%(NuGetPackageId)' == 'JetBrains.Annotations.Sources'">false</Visible>
+    </Compile>
+  </ItemGroup>
+</Project>

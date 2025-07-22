@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
   <metadata>
-    <id>JetBrains.Annotations</id>
+    <id>JetBrains.Annotations.Sources</id>
     <version>$version$</version>
     <title>$title$</title>
     <authors>$authors$</authors>
@@ -17,18 +17,11 @@
     <description>$description$</description>
     <releaseNotes>$releaseNotes$</releaseNotes>
     <tags>$tags$</tags>
-    <dependencies>
-      <group targetFramework=".NETFramework2.0" />
-      <group targetFramework=".NETPortable4.0-Profile328" />
-      <group targetFramework=".NETStandard1.0">
-        <dependency id="System.Runtime" version="4.1.0" />
-      </group>
-      <group targetFramework=".NETStandard2.0" />
-    </dependencies>
   </metadata>
   <files>
-    <file src="bin\$configuration$\**" exclude="**.nupkg,**.snupkg" target="lib" />
-    <file src="icon.png" target="" />
-    <file src="..\readme.md" target="" />
+    <file src="obj\Generated\PublicToInternalGenerator\PublicToInternalGenerator\*.cs" target="contentFiles/cs/any/JetBrains.Annotations"/>
+    <file src="JetBrains.Annotations.Sources.props" target="build/JetBrains.Annotations.Sources.props" />
+    <file src="..\icon.png" target="" />
+    <file src="..\..\readme.md" target="" />
   </files>
 </package>

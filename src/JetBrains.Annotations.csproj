@@ -1,19 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <!-- Annotations version guidelines:
-          Use 3 version numbers to follow semver guidelines
-          Use 'eap' <VersionSuffix> for EAP builds of annotations
-          MAJOR and MINOR version numbers should match latest ReSharper version (to avoid confusion),
-          PATCH version may vary during development and EAPs -->
-    <VersionPrefix>2025.1.0</VersionPrefix>
-    <VersionSuffix>eap2</VersionSuffix>
-
     <!-- versioning -->
-    <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)-$(VersionSuffix)</Version>
-    <Version Condition=" '$(Version)' == '' ">$(VersionPrefix)</Version>
     <FileVersion>$(VersionPrefix)</FileVersion>
     <AssemblyName>JetBrains.Annotations</AssemblyName>
-    <AssemblyVersion>4242.42.42.42</AssemblyVersion>
+    <AssemblyVersion>4242.42.42.42</AssemblyVersion> <!-- fixed for binary compatibility -->
+
+    <!-- project -->
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
+    <CheckNotRecommendedTargetFramework>false</CheckNotRecommendedTargetFramework>
 
     <!-- compilation -->
     <TargetFrameworks>netstandard1.0;netstandard2.0;net20;portable40-net40+sl5+win8+wp8+wpa81</TargetFrameworks>
@@ -24,10 +19,6 @@
 
     <!-- metadata -->
     <AssemblyTitle>JetBrains Annotations</AssemblyTitle>
-    <Company>JetBrains</Company>
-    <Product>JetBrains .NET Platform</Product>
-    <Authors>JetBrains</Authors>
-    <Description>Annotations to increase accuracy of ReSharper code inspections</Description>
     <RepositoryUrl Condition="'$(TargetFramework)'!='portable40-net40+sl5+win8+wp8+wpa81'">https://github.com/JetBrains/JetBrains.Annotations/</RepositoryUrl>
 
     <!-- signing -->
@@ -50,7 +41,6 @@
     <!-- packaging -->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NuspecFile>JetBrains.Annotations.nuspec</NuspecFile>
-    <NuspecProperties>Id=$(AssemblyName);Title=$(AssemblyTitle);Version=$(Version);Configuration=$(Configuration);Authors=$(Authors)</NuspecProperties>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.0'">
@@ -65,12 +55,16 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <!-- AssemblyMetadataAttribute is required for this -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <Compile Include="Annotations.cs" />
     <EmbeddedResource Include="Annotations.cs" Link="Source.cs" />
     <None Include="icon.png" Pack="true" PackagePath="\" />
+    <None Include="JetBrains.Annotations.nuspec" Pack="false" />
+    <None Include="Directory.Build.props" Pack="false" />
   </ItemGroup>
 </Project>
