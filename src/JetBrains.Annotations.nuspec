@@ -27,7 +27,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\$configuration$\**" exclude="**.nupkg,**.snupkg" target="lib" />
+    <file src="bin\$configuration$\**" exclude="**.nupkg;**.snupkg" target="lib" />
     <file src="icon.png" target="" />
     <file src="..\readme.md" target="" />
   </files>
