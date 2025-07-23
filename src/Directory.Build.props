@@ -5,7 +5,7 @@
     <Authors>JetBrains</Authors>
     <Copyright>Copyright (c) 2016-2025 JetBrains s.r.o.</Copyright>
     <PackageProjectUrl>https://www.jetbrains.com/help/resharper/Code_Analysis__Code_Annotations.html</PackageProjectUrl>
-    <PackageGitUrl>https://github.com/JetBrains/JetBrains.Annotations.git2</PackageGitUrl>
+    <PackageGitUrl>https://github.com/JetBrains/JetBrains.Annotations.git</PackageGitUrl>
 
     <PackageSummary>Annotations to increase accuracy of JetBrains Rider and ReSharper code inspections</PackageSummary>
     <Description>
