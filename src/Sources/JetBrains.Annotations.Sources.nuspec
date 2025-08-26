@@ -12,6 +12,7 @@
     <license type="expression">MIT</license>
     <copyright>$copyright$</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <developmentDependency>true</developmentDependency>
     <summary>$summary$</summary>
     <readme>readme.md</readme>
     <description>$description$</description>

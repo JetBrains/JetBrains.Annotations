@@ -66,5 +66,6 @@
     <None Include="icon.png" Pack="true" PackagePath="\" />
     <None Include="JetBrains.Annotations.nuspec" Pack="false" />
     <None Include="Directory.Build.props" Pack="false" />
+    <None Include="../readme.md" Pack="false" />
   </ItemGroup>
 </Project>
