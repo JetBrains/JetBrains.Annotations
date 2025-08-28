@@ -18,14 +18,17 @@
         Use 'eap' <VersionSuffix> for EAP builds of annotations
         MAJOR and MINOR version numbers should match latest ReSharper version (to avoid confusion),
         PATCH version may vary during development and EAPs -->
-    <VersionPrefix>2025.2.0</VersionPrefix>
-<!--    <VersionSuffix>eap4</VersionSuffix>-->
+    <VersionPrefix>2025.2.1</VersionPrefix>
+    <!--<VersionSuffix>eap4</VersionSuffix>-->
 
     <PackageReleaseNotes>
-&#8226; Added DefaultEqualityUsageAttribute for equality members usage analysis.
-&#8226; MustDisposeResourceAttribute is now allowed on struct types.
+&#8226; `[Conditional("JETBRAINS_ANNOTATIONS")]` attribute was removed from all annotation types, so the assembly reference to `JetBrains.Annotation.dll` is no longer automatically removed by the C# compiler. You can no longer safely use `PrivateAssets="All"` for package reference to `JetBrains.Annotations`. Consider migration to `JetBrains.Annotations.Sources` package if the dependency removal is important for you.
+&#8226; New `JetBrains.Annotations.Sources` package introduced as an alternative way to embed JetBrains.Annotations into your projects without package dependency.
+&#8226; Added `DefaultEqualityUsageAttribute` for equality members usage analysis.
+&#8226; `MustDisposeResourceAttribute` is now allowed on struct types.
 &#8226; Added the ability to specify the description for UsedImplicitlyAttribute (new 'Reason' property).
-&#8226; Added CqrsCommandAttribute, CqrsQueryAttribute, CqrsCommandHandlerAttribute, CqrsQueryHandlerAttribute and CqrsExcludeFromAnalysisAttribute to support CQRS analyzes of naming and adherence to the pattern.
+&#8226; Added `CqrsCommandAttribute`, `CqrsQueryAttribute`, `CqrsCommandHandlerAttribute`, `CqrsQueryHandlerAttribute` and `CqrsExcludeFromAnalysisAttribute` to support CQRS analyzes of naming and adherence to the pattern.
+&#8226; Package icon update.
     </PackageReleaseNotes>
 
     <Version Condition="'$(VersionSuffix)' != ''">$(VersionPrefix)-$(VersionSuffix)</Version>
