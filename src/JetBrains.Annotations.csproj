@@ -12,6 +12,7 @@
 
     <!-- compilation -->
     <TargetFrameworks>netstandard1.0;netstandard2.0;net20;portable40-net40+sl5+win8+wp8+wpa81</TargetFrameworks>
+    <DefineConstants>JETBRAINS_ANNOTATIONS</DefineConstants> <!-- do not erase [MeansImplicitUse] class PublicAPIAttribute -->
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>

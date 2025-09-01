@@ -60,6 +60,10 @@ public class PublicToInternalGenerator : IIncrementalGenerator
       nullableDisableDirective,
       $"#if NETCOREAPP3_0_OR_GREATER || NETSTANDARD2_1_OR_GREATER\r\n{nullableDisableDirective}\r\n#endif");
 
+    // when declared as 'partial' it should not clash with the user's Embedded attribute declaration
+    sourceCode += "\r\nnamespace Microsoft.CodeAnalysis\r\n{\r\n  " +
+                  "internal sealed partial class EmbeddedAttribute : global::System.Attribute { }\r\n}";
+
     var fileName = Path.GetFileNameWithoutExtension(file.Path);
     var newFileName = $"{fileName}.Internal.cs";
 
@@ -69,40 +73,110 @@ public class PublicToInternalGenerator : IIncrementalGenerator
 
 internal class PublicToInternalRewriter : CSharpSyntaxRewriter
 {
+  public override SyntaxNode? VisitAttributeList(AttributeListSyntax node)
+  {
+    // Remove [Conditional(...)] attributes from any attribute list
+    var filteredAttributes = new SeparatedSyntaxList<AttributeSyntax>();
+
+    foreach (var attr in node.Attributes)
+    {
+      if (!IsConditionalAttribute(attr))
+      {
+        filteredAttributes = filteredAttributes.Add(attr);
+      }
+    }
+
+    if (filteredAttributes.Count == 0)
+    {
+      // Drop the entire attribute list when it only contained Conditional
+      return null; // returning null will remove the node
+    }
+
+    var newNode = node.WithAttributes(filteredAttributes);
+    return base.VisitAttributeList(newNode);
+  }
+
+  private static TMemberDeclarationSyntax WithEmbeddedAttribute<TMemberDeclarationSyntax>(TMemberDeclarationSyntax node)
+    where TMemberDeclarationSyntax : MemberDeclarationSyntax
+  {
+    var lists = node.AttributeLists;
+
+    var attributeSyntax = SyntaxFactory.Attribute(
+      SyntaxFactory.AliasQualifiedName(
+        SyntaxFactory.IdentifierName("global"),
+        SyntaxFactory.IdentifierName("Microsoft.CodeAnalysis.EmbeddedAttribute")));
+    var attributeList = SyntaxFactory.AttributeList(SyntaxFactory.SeparatedList([attributeSyntax]))
+      .WithLeadingTrivia(SyntaxFactory.Space, SyntaxFactory.Space)
+      .WithTrailingTrivia(SyntaxFactory.ElasticCarriageReturnLineFeed);
+
+    lists = lists.Add(attributeList);
+    return (TMemberDeclarationSyntax)node.WithAttributeLists(lists);
+  }
+
   public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
   {
-    var newNode = (ClassDeclarationSyntax?)base.VisitClassDeclaration(node);
-    return ChangePublicToInternal(newNode);
+    var visited = (ClassDeclarationSyntax?)base.VisitClassDeclaration(node);
+    if (visited is null) return null;
+
+    visited = WithEmbeddedAttribute(visited);
+    visited = ChangePublicToInternal(visited);
+    return visited;
   }
 
   public override SyntaxNode? VisitInterfaceDeclaration(InterfaceDeclarationSyntax node)
   {
-    var newNode = (InterfaceDeclarationSyntax?)base.VisitInterfaceDeclaration(node);
-    return ChangePublicToInternal(newNode);
+    var visited = (InterfaceDeclarationSyntax?)base.VisitInterfaceDeclaration(node);
+    if (visited is null) return null;
+
+    visited = WithEmbeddedAttribute(visited);
+    visited = ChangePublicToInternal(visited);
+    return visited;
   }
 
   public override SyntaxNode? VisitStructDeclaration(StructDeclarationSyntax node)
   {
-    var newNode = (StructDeclarationSyntax?)base.VisitStructDeclaration(node);
-    return ChangePublicToInternal(newNode);
+    var visited = (StructDeclarationSyntax?)base.VisitStructDeclaration(node);
+    if (visited is null) return null;
+
+    visited = WithEmbeddedAttribute(visited);
+    visited = ChangePublicToInternal(visited);
+    return visited;
   }
 
   public override SyntaxNode? VisitEnumDeclaration(EnumDeclarationSyntax node)
   {
-    var newNode = (EnumDeclarationSyntax?)base.VisitEnumDeclaration(node);
-    return ChangePublicToInternal(newNode);
+    var visited = (EnumDeclarationSyntax?)base.VisitEnumDeclaration(node);
+    if (visited is null) return null;
+
+    visited = WithEmbeddedAttribute(visited);
+    visited = ChangePublicToInternal(visited);
+    return visited;
   }
 
   public override SyntaxNode? VisitDelegateDeclaration(DelegateDeclarationSyntax node)
   {
-    var newNode = (DelegateDeclarationSyntax?)base.VisitDelegateDeclaration(node);
-    return ChangePublicToInternal(newNode);
+    var visited = (DelegateDeclarationSyntax?)base.VisitDelegateDeclaration(node);
+    if (visited is null) return null;
+
+    visited = WithEmbeddedAttribute(visited);
+    visited = ChangePublicToInternal(visited);
+    return visited;
   }
 
   public override SyntaxNode? VisitRecordDeclaration(RecordDeclarationSyntax node)
   {
-    var newNode = (RecordDeclarationSyntax?)base.VisitRecordDeclaration(node);
-    return ChangePublicToInternal(newNode);
+    var visited = (RecordDeclarationSyntax?)base.VisitRecordDeclaration(node);
+    if (visited is null) return null;
+
+    visited = WithEmbeddedAttribute(visited);
+    visited = ChangePublicToInternal(visited);
+    return visited;
+  }
+
+  private static bool IsConditionalAttribute(AttributeSyntax attribute)
+  {
+    var name = attribute.Name.ToString();
+    return string.Equals(name, "Conditional", StringComparison.Ordinal);
   }
 
   private static TMemberDeclarationSyntax? ChangePublicToInternal<TMemberDeclarationSyntax>(TMemberDeclarationSyntax? node)
