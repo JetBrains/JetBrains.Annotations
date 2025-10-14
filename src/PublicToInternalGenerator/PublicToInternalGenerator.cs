@@ -100,6 +100,7 @@ internal class PublicToInternalRewriter : CSharpSyntaxRewriter
     where TMemberDeclarationSyntax : MemberDeclarationSyntax
   {
     var lists = node.AttributeLists;
+    var hasAttributeLists = lists.Any();
 
     var attributeSyntax = SyntaxFactory.Attribute(
       SyntaxFactory.AliasQualifiedName(
@@ -110,6 +111,19 @@ internal class PublicToInternalRewriter : CSharpSyntaxRewriter
       .WithTrailingTrivia(SyntaxFactory.ElasticCarriageReturnLineFeed);
 
     lists = lists.Add(attributeList);
+
+    if (!hasAttributeLists)
+    {
+      var leadingTrivia = node.GetLeadingTrivia();
+      var leadingWhitespace = leadingTrivia.LastOrDefault(x => x.IsKind(SyntaxKind.WhitespaceTrivia));
+
+      return (TMemberDeclarationSyntax)
+        node.WithoutLeadingTrivia()
+            .WithLeadingTrivia(leadingWhitespace)
+            .WithAttributeLists(lists)
+            .WithLeadingTrivia(leadingTrivia);
+    }
+
     return (TMemberDeclarationSyntax)node.WithAttributeLists(lists);
   }
 
