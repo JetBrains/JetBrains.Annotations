@@ -96,21 +96,43 @@ internal class PublicToInternalRewriter : CSharpSyntaxRewriter
     return base.VisitAttributeList(newNode);
   }
 
-  private static TMemberDeclarationSyntax WithEmbeddedAttribute<TMemberDeclarationSyntax>(TMemberDeclarationSyntax node)
+  private static TMemberDeclarationSyntax WithExtraAttributes<TMemberDeclarationSyntax>(TMemberDeclarationSyntax node)
     where TMemberDeclarationSyntax : MemberDeclarationSyntax
   {
     var lists = node.AttributeLists;
     var hasAttributeLists = lists.Any();
 
-    var attributeSyntax = SyntaxFactory.Attribute(
+    var embeddedAttributeSyntax = SyntaxFactory.Attribute(
       SyntaxFactory.AliasQualifiedName(
         SyntaxFactory.IdentifierName("global"),
         SyntaxFactory.IdentifierName("Microsoft.CodeAnalysis.EmbeddedAttribute")));
-    var attributeList = SyntaxFactory.AttributeList(SyntaxFactory.SeparatedList([attributeSyntax]))
+
+    var generatedCodeAttributeSyntax = SyntaxFactory.Attribute(
+      SyntaxFactory.AliasQualifiedName(
+        SyntaxFactory.IdentifierName("global"),
+        SyntaxFactory.IdentifierName("System.CodeDom.Compiler.GeneratedCodeAttribute")))
+      .WithArgumentList(
+        SyntaxFactory.AttributeArgumentList(
+          SyntaxFactory.SeparatedList<AttributeArgumentSyntax>([
+            SyntaxFactory.AttributeArgument(
+              SyntaxFactory.LiteralExpression(
+                SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal("JetBrains.Annotations"))),
+            SyntaxFactory.AttributeArgument(
+              SyntaxFactory.LiteralExpression(
+                SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal("42.42.42.42")))
+          ])));
+
+    var embeddedAttributeList = SyntaxFactory
+      .AttributeList(SyntaxFactory.SeparatedList([embeddedAttributeSyntax]))
       .WithLeadingTrivia(SyntaxFactory.Space, SyntaxFactory.Space)
       .WithTrailingTrivia(SyntaxFactory.ElasticCarriageReturnLineFeed);
 
-    lists = lists.Add(attributeList);
+    var generatedCodeAttributeList = SyntaxFactory
+      .AttributeList(SyntaxFactory.SeparatedList([generatedCodeAttributeSyntax]))
+      .WithLeadingTrivia(SyntaxFactory.Space, SyntaxFactory.Space)
+      .WithTrailingTrivia(SyntaxFactory.ElasticCarriageReturnLineFeed);
+
+    lists = lists.Add(embeddedAttributeList).Add(generatedCodeAttributeList);
 
     if (!hasAttributeLists)
     {
@@ -132,7 +154,7 @@ internal class PublicToInternalRewriter : CSharpSyntaxRewriter
     var visited = (ClassDeclarationSyntax?)base.VisitClassDeclaration(node);
     if (visited is null) return null;
 
-    visited = WithEmbeddedAttribute(visited);
+    visited = WithExtraAttributes(visited);
     visited = ChangePublicToInternal(visited);
     return visited;
   }
@@ -142,7 +164,7 @@ internal class PublicToInternalRewriter : CSharpSyntaxRewriter
     var visited = (InterfaceDeclarationSyntax?)base.VisitInterfaceDeclaration(node);
     if (visited is null) return null;
 
-    visited = WithEmbeddedAttribute(visited);
+    visited = WithExtraAttributes(visited);
     visited = ChangePublicToInternal(visited);
     return visited;
   }
@@ -152,7 +174,7 @@ internal class PublicToInternalRewriter : CSharpSyntaxRewriter
     var visited = (StructDeclarationSyntax?)base.VisitStructDeclaration(node);
     if (visited is null) return null;
 
-    visited = WithEmbeddedAttribute(visited);
+    visited = WithExtraAttributes(visited);
     visited = ChangePublicToInternal(visited);
     return visited;
   }
@@ -162,7 +184,7 @@ internal class PublicToInternalRewriter : CSharpSyntaxRewriter
     var visited = (EnumDeclarationSyntax?)base.VisitEnumDeclaration(node);
     if (visited is null) return null;
 
-    visited = WithEmbeddedAttribute(visited);
+    visited = WithExtraAttributes(visited);
     visited = ChangePublicToInternal(visited);
     return visited;
   }
@@ -172,7 +194,7 @@ internal class PublicToInternalRewriter : CSharpSyntaxRewriter
     var visited = (DelegateDeclarationSyntax?)base.VisitDelegateDeclaration(node);
     if (visited is null) return null;
 
-    visited = WithEmbeddedAttribute(visited);
+    visited = WithExtraAttributes(visited);
     visited = ChangePublicToInternal(visited);
     return visited;
   }
@@ -182,7 +204,7 @@ internal class PublicToInternalRewriter : CSharpSyntaxRewriter
     var visited = (RecordDeclarationSyntax?)base.VisitRecordDeclaration(node);
     if (visited is null) return null;
 
-    visited = WithEmbeddedAttribute(visited);
+    visited = WithExtraAttributes(visited);
     visited = ChangePublicToInternal(visited);
     return visited;
   }

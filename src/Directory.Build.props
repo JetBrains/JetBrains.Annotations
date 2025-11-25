@@ -18,12 +18,11 @@
         Use 'eap' <VersionSuffix> for EAP builds of annotations
         MAJOR and MINOR version numbers should match latest ReSharper version (to avoid confusion),
         PATCH version may vary during development and EAPs -->
-    <VersionPrefix>2025.2.2</VersionPrefix>
+    <VersionPrefix>2025.2.3</VersionPrefix>
     <!--<VersionSuffix>eap4</VersionSuffix>-->
 
     <PackageReleaseNotes>
-&#8226; `[Conditional]` was removed in versions 2025.2 and 2025.2.1, but brought back in 2025.2.2 due to user feedback in #45.
-&#8226; New `JetBrains.Annotations.Sources` package introduced as an alternative way to embed JetBrains.Annotations into your C# projects without binary package dependency. All annotation types declared as `internal` and marked with `[Embedded]` attribute.
+&#8226; New `JetBrains.Annotations.Sources` package introduced as an alternative way to embed JetBrains.Annotations into your C# projects without binary package dependency. All annotation types declared as `internal` and marked with `[Embedded]` and `[GeneratedCode]` attribute.
 &#8226; Added `DefaultEqualityUsageAttribute` for equality members usage analysis.
 &#8226; `MustDisposeResourceAttribute` is now allowed on struct types.
 &#8226; Added the ability to specify the description for UsedImplicitlyAttribute (new 'Reason' property).
