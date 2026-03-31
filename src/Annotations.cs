@@ -1492,6 +1492,28 @@ namespace JetBrains.Annotations
   [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class IgnoreSpellingAndGrammarErrorsAttribute : Attribute { }
 
+  /// <summary>
+  /// Static properties annotated with this attribute are automatically discovered by IDE debugger
+  /// and included to Watches window.
+  /// </summary>
+  /// <example><code>
+  /// public static class DispatcherDebugWatch
+  /// {
+  ///   [DebuggerGlobalWatch(Name = "UI Thread")]
+  ///   public static bool IsUIThread =>
+  ///     System.Windows.Application.Current.Dispatcher.CheckAccess();
+  /// }
+  /// </code></example>
+  [AttributeUsage(AttributeTargets.Property)]
+  [Conditional("JETBRAINS_ANNOTATIONS")]
+  public sealed class DebuggerGlobalWatchAttribute : Attribute
+  {
+    /// <summary>
+    /// Specifies the display name for the watch entry.
+    /// </summary>
+    public string Name { get; set; }
+  }
+
   #region ASP.NET
 
   [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]

@@ -18,17 +18,11 @@
         Use 'eap' <VersionSuffix> for EAP builds of annotations
         MAJOR and MINOR version numbers should match latest ReSharper version (to avoid confusion),
         PATCH version may vary during development and EAPs -->
-    <VersionPrefix>2025.2.4</VersionPrefix>
-    <!--<VersionSuffix>eap4</VersionSuffix>-->
+    <VersionPrefix>2026.2.0</VersionPrefix>
+    <VersionSuffix>eap1</VersionSuffix>
 
     <PackageReleaseNotes>
-&#8226; Added Microsoft Authenticode code signing for binaries.
-&#8226; New `JetBrains.Annotations.Sources` package introduced as an alternative way to embed JetBrains.Annotations into your C# projects without binary package dependency. All annotation types declared as `internal` and marked with `[Embedded]` and `[GeneratedCode]` attribute.
-&#8226; Added `DefaultEqualityUsageAttribute` for equality members usage analysis.
-&#8226; `MustDisposeResourceAttribute` is now allowed on struct types.
-&#8226; Added the ability to specify the description for UsedImplicitlyAttribute (new 'Reason' property).
-&#8226; Added `CqrsCommandAttribute`, `CqrsQueryAttribute`, `CqrsCommandHandlerAttribute`, `CqrsQueryHandlerAttribute` and `CqrsExcludeFromAnalysisAttribute` to support CQRS analyzes of naming and adherence to the pattern.
-&#8226; Package icon updated.
+&#8226; Added DebuggerGlobalWatchAttribute.
     </PackageReleaseNotes>
 
     <Version Condition="'$(VersionSuffix)' != ''">$(VersionPrefix)-$(VersionSuffix)</Version>
