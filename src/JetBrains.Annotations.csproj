@@ -16,7 +16,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8</LangVersion>
 
     <!-- metadata -->
     <AssemblyTitle>JetBrains Annotations</AssemblyTitle>
