@@ -1505,6 +1505,7 @@ namespace JetBrains.Annotations
   /// }
   /// </code></example>
   [AttributeUsage(AttributeTargets.Property)]
+  [Conditional("DEBUG")]
   [Conditional("JETBRAINS_ANNOTATIONS")]
   public sealed class DebuggerGlobalWatchAttribute : Attribute
   {
