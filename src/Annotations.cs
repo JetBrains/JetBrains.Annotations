@@ -1493,8 +1493,8 @@ namespace JetBrains.Annotations
   public sealed class IgnoreSpellingAndGrammarErrorsAttribute : Attribute { }
 
   /// <summary>
-  /// Static properties annotated with this attribute are automatically discovered by IDE debugger
-  /// and included to Watches window.
+  /// Static properties annotated with this attribute are automatically discovered by the IDE debugger
+  /// and included in the Watches window.
   /// </summary>
   /// <example><code>
   /// public static class DispatcherDebugWatch
